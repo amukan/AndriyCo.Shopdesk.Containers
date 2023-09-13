@@ -23,7 +23,7 @@ namespace AndriyCo.Shopdesk.Containers
     public class ContainerDto
     {
         [XmlAttribute(AttributeName = "xsf")]
-        public readonly string DocFormatDescription = "https://docs.google.com/document/d/1-8ds_R1Zxq7q_FTF1FnZnJLvEOaYLS7G";
+        public readonly string DocFormatDescription = "https://github.com/amukan/AndriyCo.Shopdesk.Containers.git";
 
         private string hash = string.Empty;
 

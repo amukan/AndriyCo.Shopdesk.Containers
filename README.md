@@ -153,7 +153,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 | :---| :---:| :---|
 |Id|UInt32|ID MarketingToolRecord|
 
-## <a id="table6">Таблиця 6. Нумератор типів документів ([DocumentType](/Marketing/MarketingActionRecord.cs))
+## <a id="table6">Таблиця 6. Нумератор типів документів ([DocumentType](/Documents/Document.cs))
 
 |Ім'я елементу|Опис|
 | :---| :---|
