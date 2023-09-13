@@ -125,7 +125,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 
 |Ім'я елементу|Тип даних|Опис|
 | :---| :---:| :---|
-|DiscountType|Byte|Тип знижки, енумератор: 0 - Фіксована (дисконтна картка, точне зазначення ціни, тощо.), 1 - Накопичувальна, 2 - Колонка прайсу, 3 - Колонка прайсу, 4 - Колонка прайсу, 5 - Колонка прайсу, 6 - Колонка прайсу, 7 - Не використовується, 8 - Бонусна знижка, 9 - По сертифікату, 10 - Заокруглення копійок, 11 - Колонка прайсу 6, 12 - Колонка прайсу 7, 13 - Колонка прайсу 8, 14 - Колонка прайсу 9, 15 - Колонка прайсу 10, 16 - Колонка прайсу 11, 17 - Колонка прайсу 12, 18 - Колонка прайсу 13, 19 - Колонка прайсу 14, 20 - Колонка прайсу 15|
+|DiscountType|Byte|Тип знижки, енумератор: 0 - Фіксована (дисконтна картка, точне зазначення ціни, тощо.), 1 - Накопичувальна, 2 - Колонка прайсу 1, 3 - Колонка прайсу 2, 4 - Колонка прайсу 3, 5 - Колонка прайсу 4, 6 - Колонка прайсу 5, 7 - Не використовується, 8 - Бонусна знижка, 9 - По сертифікату, 10 - Заокруглення копійок, 11 - Колонка прайсу 6, 12 - Колонка прайсу 7, 13 - Колонка прайсу 8, 14 - Колонка прайсу 9, 15 - Колонка прайсу 10, 16 - Колонка прайсу 11, 17 - Колонка прайсу 12, 18 - Колонка прайсу 13, 19 - Колонка прайсу 14, 20 - Колонка прайсу 15|
 |DiscountValue|Double|Значення знижки/надбавку на суму по товару. Позитивне значення - знижка, від'ємне - надбавка.|
 
 # <a id="table4">Таблиця 4. Запис по маркетинговій акції та маркетинговому інструменту, яким задовольняє чек (MarketingActionRecord)
@@ -187,3 +187,320 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |PosNumber|String|Номер терміналу (до 18 символів)|
 |RRN|String|Код RRN транзакції (до 12 символів)|
 |TransactionDate|String|Дата транзакції (у форматі відповіді ПС).|
+
+# Зразок файлу (*.TCUDOC), що містить чек та його оплату (XML)
+Продаж товару за ціною 36,90 грн/кг та кількістю 1,018 кг, знижка 16,90 грн/кг на ціну, заокруглення підсумкової суми шляхом додавання до суми за товар 0,04 грн.
+```xml
+<?xml version="1.0" encoding="windows-1251"?>
+<ArrayOfDocument address="м. Черкаси, вул. Чорновола, 52/1" hash="27f038ccc45cdeb1361df4a51b7e0264" originalFileName="DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc" software="ShopDesk 5.12.614 ©ANDRIY.CO" wpGuid="{D271E27D-1FFC-4E35-A8D2-C44FE78BAB56}" wpName="Shopdesk м. Черкаси, вул. Чорновола, буд. №52/1">
+  <Document>
+    <AdditionalInfo></AdditionalInfo>
+    <AgentBarcode></AgentBarcode>
+    <AgentId>0</AgentId>
+    <Amount>20.40</Amount>
+    <AmountPaid>20.40</AmountPaid>
+    <Bias>0</Bias>
+    <BonusCalculationPrinted>False</BonusCalculationPrinted>
+    <BonusPaid>0.00</BonusPaid>
+    <BonusPaymentRecordId>0</BonusPaymentRecordId>
+    <ContractorId>111</ContractorId>
+    <CurrencyId>0</CurrencyId>
+    <CurrencyRate>0</CurrencyRate>
+    <CustomerSegments></CustomerSegments>
+    <DateOfApprove>2020-08-29 11:32:20</DateOfApprove>
+    <DateOfCreate>2020-08-29 11:31:50</DateOfCreate>
+    <DeliveryPointId>0</DeliveryPointId>
+    <DepartmentId>1000000826</DepartmentId>
+    <DepartmentName>м. Черкаси, вул. Чорновола, буд. №52/1</DepartmentName>
+    <Detail>
+      <DocumentDetail>
+        <AmountToPay>20.40</AmountToPay>
+        <Barcode></Barcode>
+        <BarcodeId>0</BarcodeId>
+        <BonusSum>0.00</BonusSum>
+        <CurrentQuantity>0.000</CurrentQuantity>
+        <Discount>16.86</Discount>
+        <Discounts>
+          <Item>
+            <DiscountType>0</DiscountType>
+            <DiscountValue>17.2</DiscountValue>
+          </Item>
+          <Item>
+            <DiscountType>10</DiscountType>
+            <DiscountValue>-0.04</DiscountValue>
+          </Item>
+        </Discounts>
+        <DocumentDetailGuid>{94ee0ca6-79e8-4d62-bec8-d26b081f4c8d}</DocumentDetailGuid>
+        <DocumentId>70659</DocumentId>
+        <FranchGoodId>0</FranchGoodId>
+        <GoodId>6155</GoodId>
+        <GoodsCategoryId>421</GoodsCategoryId>
+        <GoodsItemName>Пельмені ваг.</GoodsItemName>
+        <GoodsUomId>1</GoodsUomId>
+        <GoodsUomName>кг</GoodsUomName>
+        <Id>2</Id>
+        <InventoryRecordDate>2020-08-27 14:49:51</InventoryRecordDate>
+        <InventoryRecordId>2141101300</InventoryRecordId>
+        <MaxAllowedDiscountPercent>0</MaxAllowedDiscountPercent>
+        <MaxAllowedPrice>0.00</MaxAllowedPrice>
+        <MinAllowedPrice>36.90</MinAllowedPrice>
+        <MoneySum>20.40</MoneySum>
+        <PointsSum>0.04</PointsSum>
+        <PrimaryPrice>36.9</PrimaryPrice>
+        <PurchasePrice>0</PurchasePrice>
+        <Quantity>1.018</Quantity>
+        <QuantityDifference>0.000</QuantityDifference>
+        <QuantityInPack>1.000</QuantityInPack>
+        <QuantityPack>0.000</QuantityPack>
+        <SalePrice>20.0392927308448</SalePrice>
+        <SalePriceAfterRevaluation>0.00</SalePriceAfterRevaluation>
+        <TopGoodId>0</TopGoodId>
+      </DocumentDetail>
+    </Detail>
+    <DocumentGuid>{fe7ac576-ac4e-4d83-8f77-d949a848b261}</DocumentGuid>
+    <DocumentNumber>70659</DocumentNumber>
+    <DocumentType>1</DocumentType>
+    <FiscalRegisterFiscalNumber>437578</FiscalRegisterFiscalNumber>
+    <FiscalRegisterId>22</FiscalRegisterId>
+    <FiscalRegisterName>ПРРО Checkbox</FiscalRegisterName>
+    <FiscalRegisterSerialNumber>3d79ba352b4f7d41c</FiscalRegisterSerialNumber>
+    <FranchiseContractorBarcode></FranchiseContractorBarcode>
+    <FranchiseContractorId>0</FranchiseContractorId>
+    <FranchiseContractorPhoneNumber></FranchiseContractorPhoneNumber>
+    <FranchiseeId>11</FranchiseeId>
+    <GiftCertificateSumma>0.00</GiftCertificateSumma>
+    <Id>70659</Id>
+    <IsFiscal>1</IsFiscal>
+    <LogRecords></LogRecords>
+    <MarketingActions></MarketingActions>
+    <MarketingToolRecordDescriptions></MarketingToolRecordDescriptions>
+    <PaymentMethod>0</PaymentMethod>
+    <PointsFranch>0.00</PointsFranch>
+    <PointsOther>0.00</PointsOther>
+    <SourceDocumentId>0</SourceDocumentId>
+    <Status>1</Status>
+    <SupportingDocument></SupportingDocument>
+    <TopDocumentGuid>{fe7ac576-ac4e-4d83-8f77-d949a848b261}</TopDocumentGuid>
+    <TopDocumentId>70659</TopDocumentId>
+    <TransactionTypeId>4</TransactionTypeId>
+    <UserFullName>касир1</UserFullName>
+    <UserId>5</UserId>
+    <UserName>касир1</UserName>
+  </Document>
+  <Document>
+    <AdditionalInfo></AdditionalInfo>
+    <AgentBarcode></AgentBarcode>
+    <AgentId>0</AgentId>
+    <Amount>20.40</Amount>
+    <AmountPaid>20.40</AmountPaid>
+    <Bias>0</Bias>
+    <BonusCalculationPrinted>False</BonusCalculationPrinted>
+    <BonusPaid>0.00</BonusPaid>
+    <BonusPaymentRecordId>0</BonusPaymentRecordId>
+    <ContractorId>111</ContractorId>
+    <CurrencyId>0</CurrencyId>
+    <CurrencyRate>0</CurrencyRate>
+    <CustomerSegments></CustomerSegments>
+    <DateOfApprove>2020-08-29 11:32:20</DateOfApprove>
+    <DateOfCreate>2020-08-29 11:32:20</DateOfCreate>
+    <DeliveryPointId>0</DeliveryPointId>
+    <DepartmentId>1000000826</DepartmentId>
+    <DepartmentName>м. Черкаси, вул. Чорновола, буд. №52/1</DepartmentName>
+    <Detail></Detail>
+    <DocumentGuid>{f38549da-6cfa-4fe4-b65d-5fda5a315550}</DocumentGuid>
+    <DocumentNumber>70659</DocumentNumber>
+    <DocumentType>8</DocumentType>
+    <FiscalRegisterFiscalNumber>437578</FiscalRegisterFiscalNumber>
+    <FiscalRegisterId>22</FiscalRegisterId>
+    <FiscalRegisterName>ПРРО Checkbox</FiscalRegisterName>
+    <FiscalRegisterSerialNumber>3d79ba352b4f7d41c</FiscalRegisterSerialNumber>
+    <FranchiseContractorBarcode></FranchiseContractorBarcode>
+    <FranchiseContractorId>0</FranchiseContractorId>
+    <FranchiseContractorPhoneNumber></FranchiseContractorPhoneNumber>
+    <FranchiseeId>11</FranchiseeId>
+    <GiftCertificateSumma>0.00</GiftCertificateSumma>
+    <Id>70659</Id>
+    <IsFiscal>1</IsFiscal>
+    <LogRecords></LogRecords>
+    <MarketingActions></MarketingActions>
+    <MarketingToolRecordDescriptions></MarketingToolRecordDescriptions>
+    <PaymentMethod>0</PaymentMethod>
+    <PointsFranch>0.00</PointsFranch>
+    <PointsOther>0.00</PointsOther>
+    <SourceDocumentId>0</SourceDocumentId>
+    <Status>1</Status>
+    <SupportingDocument>Оплата накладної №70659 від 2020-08-29 11:32:20</SupportingDocument>
+    <TopDocumentGuid>{fe7ac576-ac4e-4d83-8f77-d949a848b261}</TopDocumentGuid>
+    <TopDocumentId>70659</TopDocumentId>
+    <TransactionTypeId>4</TransactionTypeId>
+    <UserFullName>касир1</UserFullName>
+    <UserId>5</UserId>
+    <UserName>касир1</UserName>
+  </Document>
+</ArrayOfDocument>
+
+```
+
+# Зразок об’єкту для міжсервісного обміну, що містить чек та його оплату (JSON)
+
+```json
+{
+  "DocFormatDescription": "https://docs.google.com/document/d/1-8ds_R1Zxq7q_FTF1FnZnJLvEOaYLS7G",
+  "Address": "м. Черкаси, вул. Чорновола, 52/1",
+  "Documents": [
+    {
+      "AdditionalInfo": "",
+      "AgentBarcode": "",
+      "AgentId": 0,
+      "Amount": 20.4,
+      "AmountPaid": 20.4,
+      "BankTransactionInfo": null,
+      "Bias": 0,
+      "BonusCalculationPrinted": false,
+      "BonusPaid": 0.0,
+      "BonusPaymentRecordId": 0,
+      "ContractorId": 111,
+      "CurrencyId": 0,
+      "CurrencyRate": 0.0,
+      "CustomerSegments": [],
+      "DateOfApprove": "2020-08-29T11:32:20",
+      "DateOfCreate": "2020-08-29T11:31:50",
+      "DeliveryPointId": 0,
+      "DepartmentId": 1000000826,
+      "DepartmentName": "м. Черкаси, вул. Чорновола, буд. №52/1",
+      "Details": [
+        {
+          "AmountToPay": 20.4,
+          "Barcode": "",
+          "BarcodeId": 0,
+          "BonusSum": 0.0,
+          "CurrentQuantity": 0.0,
+          "Discount": 16.8607072691552,
+          "Discounts": [
+            {
+              "DiscountType": 0,
+              "DiscountValue": 17.2
+            },
+            {
+              "DiscountType": 10,
+              "DiscountValue": -0.04
+            }
+          ],
+          "DocumentDetailGuid": "94ee0ca6-79e8-4d62-bec8-d26b081f4c8d",
+          "DocumentId": 70659,
+          "ExciseMarkBarcode": null,
+          "FranchGoodId": 0,
+          "GoodId": 6155,
+          "GoodsCategoryId": 421,
+          "GoodsItemName": "Пельмені ваг.",
+          "GoodsUomId": 1,
+          "GoodsUomName": "кг",
+          "Id": 2,
+          "InventoryRecordDate": "2020-08-27T14:49:51",
+          "InventoryRecordId": 2141101300,
+          "MaxAllowedDiscountPercent": 0.0,
+          "MaxAllowedPrice": 0.0,
+          "MinAllowedPrice": 36.9,
+          "MoneySum": 20.4,
+          "PointsSum": 0.04,
+          "PrimaryPrice": 36.9,
+          "PurchasePrice": 0.0,
+          "Quantity": 1.018,
+          "QuantityDifference": 0.0,
+          "QuantityInPack": 1.0,
+          "QuantityPack": 0.0,
+          "SalePrice": 20.0392927308448,
+          "SalePriceAfterRevaluation": 0.0,
+          "TopGoodId": 0,
+          "Uktzed": null
+        }
+      ],
+      "DocumentGuid": "fe7ac576-ac4e-4d83-8f77-d949a848b261",
+      "DocumentNumber": "70659",
+      "DocumentType": 1,
+      "FiscalRegisterFiscalNumber": "437578",
+      "FiscalRegisterId": 22,
+      "FiscalRegisterName": "ПРРО Checkbox",
+      "FiscalRegisterSerialNumber": "3d79ba352b4f7d41c",
+      "FranchiseContractorBarcode": "",
+      "FranchiseContractorId": 0,
+      "FranchiseContractorPhoneNumber": "",
+      "FranchiseeId": 11,
+      "GiftCertificateSumma": 0.0,
+      "Id": 70659,
+      "IsFiscal": true,
+      "LogRecords": [],
+      "MarketingActionRecords": [],
+      "MarketingToolRecordDescriptions": [],
+      "PaymentMethod": 0,
+      "PointsFranch": 0.0,
+      "PointsOther": 0.0,
+      "SourceDocumentId": 0,
+      "Status": 1,
+      "SupportingDocument": "",
+      "TopDocumentGuid": "fe7ac576-ac4e-4d83-8f77-d949a848b261",
+      "TopDocumentId": 70659,
+      "TransactionTypeId": 4,
+      "UserFullName": "касир1",
+      "UserId": 5,
+      "UserName": "касир1"
+    },
+    {
+      "AdditionalInfo": "",
+      "AgentBarcode": "",
+      "AgentId": 0,
+      "Amount": 20.4,
+      "AmountPaid": 20.4,
+      "BankTransactionInfo": null,
+      "Bias": 0,
+      "BonusCalculationPrinted": false,
+      "BonusPaid": 0.0,
+      "BonusPaymentRecordId": 0,
+      "ContractorId": 111,
+      "CurrencyId": 0,
+      "CurrencyRate": 0.0,
+      "CustomerSegments": [],
+      "DateOfApprove": "2020-08-29T11:32:20",
+      "DateOfCreate": "2020-08-29T11:32:20",
+      "DeliveryPointId": 0,
+      "DepartmentId": 1000000826,
+      "DepartmentName": "м. Черкаси, вул. Чорновола, буд. №52/1",
+      "Details": [],
+      "DocumentGuid": "f38549da-6cfa-4fe4-b65d-5fda5a315550",
+      "DocumentNumber": "70659",
+      "DocumentType": 8,
+      "FiscalRegisterFiscalNumber": "437578",
+      "FiscalRegisterId": 22,
+      "FiscalRegisterName": "ПРРО Checkbox",
+      "FiscalRegisterSerialNumber": "3d79ba352b4f7d41c",
+      "FranchiseContractorBarcode": "",
+      "FranchiseContractorId": 0,
+      "FranchiseContractorPhoneNumber": "",
+      "FranchiseeId": 11,
+      "GiftCertificateSumma": 0.0,
+      "Id": 70659,
+      "IsFiscal": true,
+      "LogRecords": [],
+      "MarketingActionRecords": [],
+      "MarketingToolRecordDescriptions": [],
+      "PaymentMethod": 0,
+      "PointsFranch": 0.0,
+      "PointsOther": 0.0,
+      "SourceDocumentId": 0,
+      "Status": 1,
+      "SupportingDocument": "Оплата накладної №70659 від 2020-08-29 11:32:20",
+      "TopDocumentGuid": "fe7ac576-ac4e-4d83-8f77-d949a848b261",
+      "TopDocumentId": 70659,
+      "TransactionTypeId": 4,
+      "UserFullName": "касир1",
+      "UserId": 5,
+      "UserName": "касир1"
+    }
+  ],
+  "Hash": "27f038ccc45cdeb1361df4a51b7e0264",
+  "OriginalFileName": "DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc",
+  "Software": "ShopDesk 5.12.614 ©ANDRIY.CO",
+  "WpGuid": "{D271E27D-1FFC-4E35-A8D2-C44FE78BAB56}",
+  "WpName": "Shopdesk м. Черкаси, вул. Чорновола, буд. №52/1"
+}
+```
