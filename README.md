@@ -56,7 +56,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |Details (Xml: Detail)|Колекція елементів [DocumentDetail](#table7)|Колекція записів з товарами (див. [Таблицю 2](#table2))|
 |DocumentGuid|String|Унікальний ідентифікатор документу|
 |DocumentNumber|UInt32|Номер документа (бухгалтерський, нумерація може скидатись раз на місяць, чи квартал, чи рік)|
-|DocumentType|UInt32|Тип документу, нумератор (див. [Таблицю 6](file:///D:/GoogleDrive/Documents/Shopdesk%20-%20%D0%9E%D0%BF%D0%B8%D1%81%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83%20%D1%87%D0%B5%D0%BA%D0%B0.docx#bookmark=id.2iq8gzs))|
+|DocumentType|UInt32|Тип документу, нумератор (див. [Таблицю 6](#table6))|
 |FiscalRegisterFiscalNumber|String|Фіскальний номер фіскального реєстратора|
 |FiscalRegisterId|Byte|Нумератор фіскального реєстратора (0...22, докладніше - по запиту)|
 |FiscalRegisterName|String|Назва фіскального реєстратора|
@@ -69,8 +69,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |Id|UInt32|Внутрішній номер документу (внутрішній номер в табл. nakl)|
 |IsFiscal|Xml: Byte, Json: Bool|Чек фіскальний (1 або true) або нефіскальний (0 або false)|
 |LogRecords|Колекція елементів LogRecord|Перелік записів журналу каси, які стосуються цього чека|
-|MarketingActionRecords (Xml: MarketingActions)|Колекція елементів [MarketingActionRecord](file:///D:/GoogleDrive/Documents/Shopdesk%20-%20%D0%9E%D0%BF%D0%B8%D1%81%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83%20%D1%87%D0%B5%D0%BA%D0%B0.docx#bookmark=id.1jlao46)|Перелік подарунків з маркетингових інструментів, які спрацювали для цього чека (див. [Таблицю 4](file:///D:/GoogleDrive/Documents/Shopdesk%20-%20%D0%9E%D0%BF%D0%B8%D1%81%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83%20%D1%87%D0%B5%D0%BA%D0%B0.docx#bookmark=id.1jlao46))|
-|MarketingToolRecordDescriptions|Колекція елементів [MarketingToolRecordDescription](file:///D:/GoogleDrive/Documents/Shopdesk%20-%20%D0%9E%D0%BF%D0%B8%D1%81%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83%20%D1%87%D0%B5%D0%BA%D0%B0.docx#bookmark=id.43ky6rz)|Перелік повідомлень покупцю по періодичних маркетингових інструментах, які спрацювали на сервері та були надруковані у чекові покупця (див. [Таблицю 5](file:///D:/GoogleDrive/Documents/Shopdesk%20-%20%D0%9E%D0%BF%D0%B8%D1%81%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83%20%D1%87%D0%B5%D0%BA%D0%B0.docx#bookmark=id.43ky6rz))|
+|MarketingActionRecords (Xml: MarketingActions)|Колекція елементів [MarketingActionRecord](#table4)|Перелік подарунків з маркетингових інструментів, які спрацювали для цього чека (див. [Таблицю 4](#table7))|
+|MarketingToolRecordDescriptions|Колекція елементів [MarketingToolRecordDescription](#table5)|Перелік повідомлень покупцю по періодичних маркетингових інструментах, які спрацювали на сервері та були надруковані у чекові покупця (див. [Таблицю 5](#table5))|
 |PaymentMethod(=0 для товарного документа)|Byte|Форма оплати. 0 - готівка, 1 - безготівкова (картка), 2 - кредит, 3 - сертифікат. **Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0**|
 |PointsFranch|Double|Бали, які були нараховані по товарам франшизи в цьому документу|
 |PointsOther|Double|Бали по решті товарів (не франшизи) цього документу|
@@ -94,7 +94,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |BonusSum|Double|Бонусна частка в оплаті за товар|
 |CurrentQuantity|Double|Поточна кількість|
 |Discount|Double|Знижка як різниця між реєстровою ціною та факт. роздрібної у поточному документі. тобто, *Discount = PrimaryPrice - SalePrice*|
-|Discounts|Колекція елементів [Discount](file:///D:/GoogleDrive/Documents/Shopdesk%20-%20%D0%9E%D0%BF%D0%B8%D1%81%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83%20%D1%87%D0%B5%D0%BA%D0%B0.docx#bookmark=id.34g0dwd)|Колекція записів про знижку/нарахування на суму товару (див. [Таблицю 3](file:///D:/GoogleDrive/Documents/Shopdesk%20-%20%D0%9E%D0%BF%D0%B8%D1%81%20%D1%84%D0%B0%D0%B9%D0%BB%D1%83%20%D1%87%D0%B5%D0%BA%D0%B0.docx#bookmark=id.34g0dwd))|
+|Discounts|Колекція елементів [Discount](#table3)|Колекція записів про знижку/нарахування на суму товару (див. [Таблицю 3](#table3))|
 |DocumentDetailGuid|Guid|Унікальний ідентифікатор товарного запису|
 |DocumentId|UInt32|Посилання на документ, який містить запис|
 |ExciseMarkBarcode|String|Штрих-код акцизної марки|
