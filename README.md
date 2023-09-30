@@ -179,7 +179,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |<sup>*</sup>AuthCode|String|Код авторизації (до 6 символів)|
 |<sup>*</sup>BankName|String|Назва банку (до 18 символів)|
 |<sup>*</sup>CardNumber|String|Номер картки (до 18 символів)|
-|<sup>*</sup>InvoiceNumber|Unt32|Номер чека.|
+|<sup>*</sup>InvoiceNumber|UInt32|Номер чека.|
 |<sup>*</sup>IsSignatureRequired|Bool|Вимагається підпис (true/false)|
 |<sup>*</sup>MerchantId|UInt32|Код продавця|
 |OtherAdditionalData|String|Інші додаткові дані по транзакції (серіалізовані)|
@@ -193,24 +193,24 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |Ім'я елементу          |Тип даних|Опис                                 |
 |                   :---|    :---:|                                 :---|
 |AppVersion             |String   |Назва та версія касового додатку     |
-|CashierId              |int      |ID касира                            |
-|ContractorName         |string   |Ім'я контрагенту                     |
-|DepartmentBalance      |double   |Залишок в касі                       |
-|DepartmentName         |string   |Назва торгової точки                 |
-|DocumentSlot           |string   |номер відкоаденого чеку              |
-|ErrorDescription       |string   |Опис помилки                         |
-|ErrorModule            |string   |Місце помилки                        |
-|ErrorNumber            |int      |Номер помилки                        |
-|GoodsItemAmount        |double   |Сума по товару                       |
-|GoodsItemBarcode       |string   |Штрихкод товару                      |
-|GoodsItemName          |string   |Назва товару                         |
-|GoodsItemPrice         |double   |Ціна товару                          |
-|GoodsItemQuantity      |double   |Кількість товару                     |
-|GoodsItemQuantityReestr|double   |Поточна кількість товару по реєстру  |
-|Id                     |int      |ID запису                            |
-|Info                   |string   |Додаткова інформація                 |
-|LogLevel               |byte     |Рівень логування                     |
-|Message                |string   |Подія                                |
+|CashierId              |UInt32   |ID касира                            |
+|ContractorName         |String   |Ім'я контрагенту                     |
+|DepartmentBalance      |Double   |Залишок в касі                       |
+|DepartmentName         |String   |Назва торгової точки                 |
+|DocumentSlot           |String   |номер відкоаденого чеку              |
+|ErrorDescription       |String   |Опис помилки                         |
+|ErrorModule            |String   |Місце помилки                        |
+|ErrorNumber            |UInt32   |Номер помилки                        |
+|GoodsItemAmount        |Double   |Сума по товару                       |
+|GoodsItemBarcode       |String   |Штрихкод товару                      |
+|GoodsItemName          |String   |Назва товару                         |
+|GoodsItemPrice         |Double   |Ціна товару                          |
+|GoodsItemQuantity      |Double   |Кількість товару                     |
+|GoodsItemQuantityReestr|Double   |Поточна кількість товару по реєстру  |
+|Id                     |UInt32   |ID запису                            |
+|Info                   |String   |Додаткова інформація                 |
+|LogLevel               |Byte     |Рівень логування                     |
+|Message                |String   |Подія                                |
 |Timestamp              |DateTime |Дата та час запису у форматі UnixDate|
 
 ## <a id="addition1">Додаток 1. Зразок файлу (*.TCUDOC), що містить чек та його оплату (XML)
