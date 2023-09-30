@@ -190,27 +190,27 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 
 ## <a id="table8">Таблиця 8. Запис журналу дій касира ([LogRecord](/LogRecord.cs))
 
-|Ім'я елементу|Тип даних|Опис|
-|AppVersion|String|Назва та версія касового додатку|
-|CashierId|int|ID касира|
-|ContractorName|string|Ім'я контрагенту|
-|DepartmentBalance|double|Залишок в касі|
-|DepartmentName|string|Назва торгової точки|
-|DocumentSlot|string|номер відкоаденого чеку|
-|ErrorDescription|string|Опис помилки|
-|ErrorModule|string|Місце помилки|
-|ErrorNumber|int|Номер помилки|
-|GoodsItemAmount|double|Сума по товару|
-|GoodsItemBarcode|string|Штрихкод товару|
-|GoodsItemName|string|Назва товару|
-|GoodsItemPrice|double|Ціна товару|
-|GoodsItemQuantity|double|Кількість товару|
-|GoodsItemQuantityReestr|double|Поточна кількість товару по реєстру|
-|Id|int|ID запису|
-|Info|string|Додаткова інформація|
-|LogLevel|byte|Рівень логування|
-|Message|string|Подія|
-|Timestamp|DateTime|Дата та час запису у форматі UnixDate|
+|Ім'я елементу          |Тип даних|Опис                                 |
+|AppVersion             |String   |Назва та версія касового додатку     |
+|CashierId              |int      |ID касира                            |
+|ContractorName         |string   |Ім'я контрагенту                     |
+|DepartmentBalance      |double   |Залишок в касі                       |
+|DepartmentName         |string   |Назва торгової точки                 |
+|DocumentSlot           |string   |номер відкоаденого чеку              |
+|ErrorDescription       |string   |Опис помилки                         |
+|ErrorModule            |string   |Місце помилки                        |
+|ErrorNumber            |int      |Номер помилки                        |
+|GoodsItemAmount        |double   |Сума по товару                       |
+|GoodsItemBarcode       |string   |Штрихкод товару                      |
+|GoodsItemName          |string   |Назва товару                         |
+|GoodsItemPrice         |double   |Ціна товару                          |
+|GoodsItemQuantity      |double   |Кількість товару                     |
+|GoodsItemQuantityReestr|double   |Поточна кількість товару по реєстру  |
+|Id                     |int      |ID запису                            |
+|Info                   |string   |Додаткова інформація                 |
+|LogLevel               |byte     |Рівень логування                     |
+|Message                |string   |Подія                                |
+|Timestamp              |DateTime |Дата та час запису у форматі UnixDate|
 
 ## <a id="addition1">Додаток 1. Зразок файлу (*.TCUDOC), що містить чек та його оплату (XML)
 
