@@ -40,7 +40,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |<sup>*</sup>Amount|Double|Сума за документом|
 |<sup>*</sup>AmountPaid|Double|Сума оплати|
 |BankTransactionInfo (тільки для документів з DocumentType = 8, 16 та PaymentMethod = 1)|Елемент типу [TransactionInfo](#table7)|Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою (див. [Таблицю 7](#table7)). Для інших видів оплати (не картка) може бути відсутній.|
-|Bias|Int32|Часовий пояс, в якому знаходиться каса, в хвилинах|
+|<sup>*</sup>Bias|Int32|Часовий пояс, в якому знаходиться каса, в хвилинах|
 |BonusCalculationPrinted|Boolean|Ознака того, що на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси|
 |BonusPaid|Double|Сума бонусної знижки|
 |BonusPaymentRecordId|UInt32|ID запису про списання бонусної суми, отриманого від сервісу CRM|
@@ -62,9 +62,9 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |FiscalRegisterName|String|Назва фіскального реєстратора|
 |FiscalRegisterSerialNumber|String|Серійний номер фіскального реєстратора|
 |FranchiseContractorBarcode|String|Штрих-код картки лояльності клієнта CRM|
-|FranchiseContractorId|UInt32|ID клієнта з CRM. (=0 якщо це клієнт з облікової системи франчайзера)|
+|<sup>*</sup>FranchiseContractorId|UInt32|ID клієнта з CRM. (=0 якщо це клієнт з облікової системи франчайзера)|
 |FranchiseContractorPhoneNumber|String|Номер телефону клієнта CRM, наприклад, 380671234567|
-|FranchiseeId|UInt32|ID франчайзі|
+|<sup>*</sup>FranchiseeId|UInt32|ID франчайзі|
 |GiftCertificateSumma|UInt16|Номінал сертифікату.|
 |<sup>*</sup>Id|UInt32|Внутрішній номер документу (внутрішній номер в табл. nakl)|
 |<sup>*</sup>IsFiscal|Xml: Byte, Json: Bool|Чек фіскальний (1 або true) або нефіскальний (0 або false)|
@@ -75,7 +75,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |PointsFranch|Double|Бали, які були нараховані по товарам франшизи в цьому документу|
 |PointsOther|Double|Бали по решті товарів (не франшизи) цього документу|
 |SourceDocumentId|UInt32|ID документу, що став підставою для створення поточного. (=0)|
-|Status|Byte|Статус документа (0 - відкладений, 1 - проведений)|
+|<sup>*</sup>Status|Byte|Статус документа (0 - відкладений, 1 - проведений)|
 |SupportingDocument|String|Підстава або коментар|
 |TopDocumentGuid|String|Унікальний ідентифікатор зв'язаного документу (використовується для повернення товарів, посилання на видаткову накладну)|
 |TopDocumentId|UInt32|Посилання на ID видаткової накладної в документі оплати|
