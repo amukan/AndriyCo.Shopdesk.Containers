@@ -68,7 +68,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |GiftCertificateSumma|UInt16|Номінал сертифікату.|
 |<sup>*</sup>Id|UInt32|Внутрішній номер документу (внутрішній номер в табл. nakl)|
 |<sup>*</sup>IsFiscal|Xml: Byte, Json: Bool|Чек фіскальний (1 або true) або нефіскальний (0 або false)|
-|LogRecords|Колекція елементів LogRecord|Перелік записів журналу каси, які стосуються цього чека|
+|LogRecords|Колекція елементів [LogRecord](#table8)|Перелік записів журналу каси, які стосуються цього чека (див. [Таблицю 8](#table8))|
 |MarketingActionRecords (Xml: MarketingActions) (тільки для документів з DocumentType = 1)|Колекція елементів [MarketingActionRecord](#table4)|Перелік подарунків з маркетингових інструментів, які спрацювали для цього чека (див. [Таблицю 4](#table7))|
 |MarketingToolRecordDescriptions (тільки для документів з DocumentType = 1)|Колекція елементів [MarketingToolRecordDescription](#table5)|Перелік повідомлень покупцю по періодичних маркетингових інструментах, які спрацювали на сервері та були надруковані у чекові покупця (див. [Таблицю 5](#table5))|
 |<sup>*</sup>PaymentMethod (завжди =0 для товарних документів)|Byte|Форма оплати. 0 - готівка, 1 - безготівкова (картка), 2 - кредит, 3 - сертифікат. **Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0**|
@@ -182,11 +182,35 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |<sup>*</sup>InvoiceNumber|Unt32|Номер чека.|
 |<sup>*</sup>IsSignatureRequired|Bool|Вимагається підпис (true/false)|
 |<sup>*</sup>MerchantId|UInt32|Код продавця|
-|OtherAdditionalData|String|Інші додаткові дані по транзакції (сераілізовані)|
+|OtherAdditionalData|String|Інші додаткові дані по транзакції (серіалізовані)|
 |<sup>*</sup>PaymentSystemName|String|Платіжна система (до 18 символів)|
 |<sup>*</sup>PosNumber|String|Номер терміналу (до 18 символів)|
 |<sup>*</sup>RRN|String|Код RRN транзакції (до 12 символів)|
 |<sup>*</sup>TransactionDate|String|Дата транзакції (у форматі відповіді ПС).|
+
+## <a id="table8">Таблиця 8. Запис журналу дій касира ([LogRecord](/LogRecord.cs))
+
+|Ім'я елементу|Тип даних|Опис|
+|AppVersion|String|Назва та версія касового додатку|
+|CashierId|int|ID касира|
+|ContractorName|string|Ім'я контрагенту|
+|DepartmentBalance|double|Залишок в касі|
+|DepartmentName|string|Назва торгової точки|
+|DocumentSlot|string|номер відкоаденого чеку|
+|ErrorDescription|string|Опис помилки|
+|ErrorModule|string|Місце помилки|
+|ErrorNumber|int|Номер помилки|
+|GoodsItemAmount|double|Сума по товару|
+|GoodsItemBarcode|string|Штрихкод товару|
+|GoodsItemName|string|Назва товару|
+|GoodsItemPrice|double|Ціна товару|
+|GoodsItemQuantity|double|Кількість товару|
+|GoodsItemQuantityReestr|double|Поточна кількість товару по реєстру|
+|Id|int|ID запису|
+|Info|string|Додаткова інформація|
+|LogLevel|byte|Рівень логування|
+|Message|string|Подія|
+|Timestamp|DateTime|Дата та час запису у форматі UnixDate|
 
 ## <a id="addition1">Додаток 1. Зразок файлу (*.TCUDOC), що містить чек та його оплату (XML)
 
