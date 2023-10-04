@@ -22,8 +22,15 @@ namespace AndriyCo.Shopdesk.Containers
     [XmlType("ArrayOfDocument")]
     public class ContainerDto
     {
-        [XmlAttribute(AttributeName = "xsf")]
-        public readonly string DocFormatDescription = "https://github.com/amukan/AndriyCo.Shopdesk.Containers.git";
+        [XmlAttribute(AttributeName = "docFormatDescription")]
+        public string DocFormatDescription
+        {
+            get => "https://github.com/amukan/AndriyCo.Shopdesk.Containers.git";
+            set
+            {
+                // this property is read only}
+            }
+        }
 
         private string hash = string.Empty;
 
@@ -49,7 +56,6 @@ namespace AndriyCo.Shopdesk.Containers
                     using SHA1Managed sha1 = new();
                     byte[] asciiArray = ASCIIEncoding.ASCII.GetBytes(str);
                     var hash = sha1.ComputeHash(asciiArray);
-                    //var hash = sha1.ComputeHash(str.ToArrayASCIIFormat());
                     return Convert.ToBase64String(hash);
                 }
             }

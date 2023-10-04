@@ -3,6 +3,7 @@ using AndriyCo.Shopdesk.Containers.Marketing;
 using AndriyCo.Shopdesk.Containers.Serialization.Xml.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -56,6 +57,27 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Виробництво</summary>
         [XmlEnum(Name = "8192")] Production = 8192
+    }
+
+    /// <summary>
+    /// Тип товару
+    /// </summary>
+    public enum GoodsItemType : int
+    {
+        /// <summary>
+        /// Елементарний товар (інгредієнт)
+        /// </summary>
+        Ingredient = 1,
+
+        /// <summary>
+        /// Виріб
+        /// </summary>
+        Product = 2,
+
+        /// <summary>
+        /// Робота/послуга
+        /// </summary>
+        Job = 4
     }
 
     public enum PaymentMethod : int
@@ -334,6 +356,11 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>Назва товару</summary>
         public string GoodsItemName { get; set; }
 
+        /// <summary>
+        /// Тип товару
+        /// </summary>
+        public GoodsItemType GoodsItemType { get; set; } = GoodsItemType.Ingredient;
+
         /// <summary>Id одиниці виміру у БД франчайзі</summary>
         public long GoodsUomId { get; set; }
 
@@ -421,6 +448,10 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Ціна після переоцінки (для документа переоцінки). Значення присутнє тільки у документах переоцінки.</summary>
         [Money] public double SalePriceAfterRevaluation { get; set; }
+
+        /// <summary>Guid товарного запису, на який посилається цей товарний запис</summary>
+        /// <remarks>Наприклад, товар-доповнення до певної страви</remarks>
+        public Guid? TopDocumentDetailGuid { get; set; }
 
         public long TopGoodId { get; set; }
 
