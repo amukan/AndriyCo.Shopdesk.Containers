@@ -367,8 +367,9 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <UserName>касир1</UserName>
   </Document>
 </ArrayOfDocument>
-
 ```
+
+[Сервіс для перевірки структури XML чеку](https://base2base.com.ua/Shopserver/ContainerTest)
 
 ## <a id="addition2">Додаток 2. Зразок об’єкту для міжсервісного обміну, що містить чек та його оплату (JSON)
 
