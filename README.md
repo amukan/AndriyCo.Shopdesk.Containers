@@ -37,37 +37,37 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |:---|:---:|:---|
 |AdditionalInfo|String|Додаткова інформація по документу|
 |AgentBarcode|String|Штрих-код картки агенту-продавця|
-|AgentId|UInt32|ID торгового агенту-продавця|
+|AgentId|Long|ID торгового агенту-продавця|
 |<sup>*</sup>Amount|Double|Сума за документом|
 |<sup>*</sup>AmountPaid|Double|Сума оплати|
 |BankTransactionInfo (тільки для документів з DocumentType = 8, 16 та PaymentMethod = 1)|Елемент типу [TransactionInfo](#table7)|Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою (див. [Таблицю 7](#table7)). Для інших видів оплати (не картка) може бути відсутній.|
 |<sup>*</sup>Bias|Int32|Часовий пояс, в якому знаходиться каса, в хвилинах|
 |BonusCalculationPrinted|Boolean|Ознака того, що на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси|
 |BonusPaid|Double|Сума бонусної знижки|
-|BonusPaymentRecordId|UInt32|ID запису про списання бонусної суми, отриманого від сервісу CRM|
-|<sup>*</sup>ContractorId|UInt32|ID клієнта з облікової системи франчайзера. (=0 якщо це CRM клієнт)|
+|BonusPaymentRecordId|Long|ID запису про списання бонусної суми, отриманого від сервісу CRM|
+|<sup>*</sup>ContractorId|Long|ID клієнта з облікової системи франчайзера. (=0 якщо це CRM клієнт)|
 |CurrencyId|Byte|Валюта оплати|
 |CurrencyRate|Double|Курс валюти|
 |CustomerSegments (тільки для документів з DocumentType = 1)|Колекція елементів CustomerSegment|Перелік сегментів, до яких належить покупець, як учасник програми лояльності у CRM системі|
 |<sup>*</sup>DateOfApprove|Date|Дата та час (місцеві) затвердження чека|
 |<sup>*</sup>DateOfCreate|Date|Дата та час (місцеві) створення чека (вводу першої товарної позиції)|
-|DeliveryPointId|UInt32|ID точки доставки|
-|<sup>*</sup>DepartmentId|UInt32|ID торгової точки|
+|DeliveryPointId|Long|ID точки доставки|
+|<sup>*</sup>DepartmentId|Long|ID торгової точки|
 |<sup>*</sup>DepartmentName|String|Назва торгової точки|
 |<sup>*</sup>Details (Xml: Detail) (не обов'язкова для документів з DocumentType = 8, 16, 2048)|Колекція елементів [DocumentDetail](#table2)|Колекція записів з товарами (див. [Таблицю 2](#table2))|
 |<sup>*</sup>DocumentGuid|String|Унікальний ідентифікатор документу|
-|<sup>*</sup>DocumentNumber|UInt32|Номер документа (бухгалтерський, нумерація може скидатись раз на місяць, чи квартал, чи рік)|
-|<sup>*</sup>DocumentType|UInt32|Тип документу, нумератор (див. [Таблицю 6](#table6))|
+|<sup>*</sup>DocumentNumber|String|Номер документа (бухгалтерський, нумерація може скидатись раз на місяць, чи квартал, чи рік)|
+|<sup>*</sup>DocumentType|Int|Тип документу, нумератор (див. [Таблицю 6](#table6))|
 |FiscalRegisterFiscalNumber|String|Фіскальний номер фіскального реєстратора|
 |FiscalRegisterId|Byte|Нумератор фіскального реєстратора (0...22, докладніше - по запиту)|
 |FiscalRegisterName|String|Назва фіскального реєстратора|
 |FiscalRegisterSerialNumber|String|Серійний номер фіскального реєстратора|
 |FranchiseContractorBarcode|String|Штрих-код картки лояльності клієнта CRM|
-|<sup>*</sup>FranchiseContractorId|UInt32|ID клієнта з CRM. (=0 якщо це клієнт з облікової системи франчайзера)|
+|<sup>*</sup>FranchiseContractorId|Long|ID клієнта з CRM. (=0 якщо це клієнт з облікової системи франчайзера)|
 |FranchiseContractorPhoneNumber|String|Номер телефону клієнта CRM, наприклад, 380671234567|
-|<sup>*</sup>FranchiseeId|UInt32|ID франчайзі|
-|GiftCertificateSumma|UInt16|Номінал сертифікату.|
-|<sup>*</sup>Id|UInt32|Внутрішній номер документу (внутрішній номер в табл. nakl)|
+|<sup>*</sup>FranchiseeId|Long|ID франчайзі|
+|GiftCertificateSumma|Double|Номінал сертифікату.|
+|<sup>*</sup>Id|Long|Внутрішній номер документу (внутрішній номер в табл. nakl)|
 |<sup>*</sup>IsFiscal|Xml: Byte, Json: Bool|Чек фіскальний (1 або true) або нефіскальний (0 або false)|
 |LogRecords|Колекція елементів [LogRecord](#table8)|Перелік записів журналу каси, які стосуються цього чека (див. [Таблицю 8](#table8))|
 |MarketingActionRecords (Xml: MarketingActions) (тільки для документів з DocumentType = 1)|Колекція елементів [MarketingActionRecord](#table4)|Перелік подарунків з маркетингових інструментів, які спрацювали для цього чека (див. [Таблицю 4](#table7))|
@@ -75,14 +75,14 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |<sup>*</sup>PaymentMethod (завжди =0 для товарних документів)|Byte|Форма оплати. 0 - готівка, 1 - безготівкова (картка), 2 - кредит, 3 - сертифікат. **Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0**|
 |PointsFranch|Double|Бали, які були нараховані по товарам франшизи в цьому документу|
 |PointsOther|Double|Бали по решті товарів (не франшизи) цього документу|
-|SourceDocumentId|UInt32|ID документу, що став підставою для створення поточного. (=0)|
+|SourceDocumentId|Long|ID документу, що став підставою для створення поточного. (=0)|
 |<sup>*</sup>Status|Byte|Статус документа (0 - відкладений, 1 - проведений)|
 |SupportingDocument|String|Підстава або коментар|
 |TopDocumentGuid|String|Унікальний ідентифікатор зв'язаного документу (використовується для повернення товарів, посилання на видаткову накладну)|
-|TopDocumentId|UInt32|Посилання на ID видаткової накладної в документі оплати|
-|<sup>*</sup>TransactionTypeId|UInt16|ID статті руху документа|
+|TopDocumentId|Long|Посилання на ID видаткової накладної в документі оплати|
+|<sup>*</sup>TransactionTypeId|Long|ID статті руху документа|
 |UserFullName|String|Повне ім'я користувача (касира)|
-|<sup>*</sup>UserID|UInt32|ID користувача (касира)|
+|<sup>*</sup>UserID|Long|ID користувача (касира)|
 |<sup>*</sup>UserName|String|Ім'я користувача (касира)|
 
 ## <a id="table2">Таблиця 2. Запис з товаром ([DocumentDetail](/Documents/Document.cs))
@@ -91,23 +91,23 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 | :---| :---:| :---|
 |<sup>*</sup>AmountToPay|Double|Сума до оплати товару. Розраховується як добуток *SalePrice* * *Quantity*|
 |Barcode|String|Штрих-код товару|
-|BarcodeId|UInt32|ID штрих-коду товару|
+|BarcodeId|Long|ID штрих-коду товару|
 |BonusSum|Double|Бонусна частка в оплаті за товар|
 |CurrentQuantity|Double|Поточна кількість|
 |<sup>*</sup>Discount|Double|Знижка як різниця між реєстровою ціною та факт. роздрібної у поточному документі. тобто, *Discount = PrimaryPrice - SalePrice*|
 |Discounts|Колекція елементів [Discount](#table3)|Колекція записів про знижку/нарахування на суму товару (див. [Таблицю 3](#table3))|
 |<sup>*</sup>DocumentDetailGuid|Guid|Унікальний ідентифікатор товарного запису|
-|<sup>*</sup>DocumentId|UInt32|Посилання на документ, який містить запис|
+|<sup>*</sup>DocumentId|Long|Посилання на документ, який містить запис|
 |ExciseMarkBarcode|String|Штрих-код акцизної марки|
-|FranchGoodId|UInt32|ID товару CRM|
-|<sup>*</sup>GoodId|UInt32|ID товару|
-|<sup>*</sup>GoodsCategoryId|UInt32|ID групи товару|
+|FranchGoodId|Long|ID товару CRM|
+|<sup>*</sup>GoodId|Long|ID товару|
+|<sup>*</sup>GoodsCategoryId|Long|ID групи товару|
 |<sup>*</sup>GoodsItemName|String|Назва товару|
-|<sup>*</sup>GoodsUomId|UInt32|ID одиниці виміру у БД франчайзі|
+|<sup>*</sup>GoodsUomId|Long|ID одиниці виміру у БД франчайзі|
 |<sup>*</sup>GoodsUomName|String|Назва одиниці виміру|
-|<sup>*</sup>Id|UInt32|ID запису|
+|<sup>*</sup>Id|Long|ID запису|
 |<sup>*</sup>InventoryRecordDate|Date|Дата та час оновлення реєстрового запису (для онлайн режиму - поточні, для офлайн - дата останньої синхронізації офлайн БД)|
-|InventoryRecordId|UInt32|ID реєстрового запису|
+|InventoryRecordId|Long|ID реєстрового запису|
 |MaxAllowedDiscountPercent|Double|Максимальна дозволена знижка на товар у відсотках за даними облікової системи. Значення від 0 до 1, де 1 - знижка 100%. Значення присутнє тільки у документах продажу.|
 |MaxAllowedPrice|Double|Максимальна дозволена ціна на товар за даними облікової системи. Значення присутнє тільки у документах продажу.|
 |MinAllowedPrice|Double|Мінімальна дозволена ціна товару. Розраховується як *MinAllowedPrice = PrimaryPrice * (1 - MaxAllowedDiscountPercent)* Значення присутнє тільки у документах продажу.|
@@ -122,7 +122,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |<sup>*</sup>SalePrice|Double|Фактична роздрібна ціна з урахуванням усіх знижок. Це ціна для облікової системи, оскільки може мати багато знаків після коми. У цій ціні враховано всі знижки та округлення, які застосовуються до суми товару. Добуток *SalePrice* та *Quantity* дасть точну суму до оплати товару *AmountToPay*.|
 |SalePriceAfterRevaluation|Double|Ціна після переоцінки (для документа переоцінки). Ненульове значення має тільки документ переоцінки.|
 |TopDocumentDetailGuid|Guid|Guid товарного запису, на який посилається цей товарний запис. Наприклад, товар-доповнення до певної страви|
-|TopGoodId|UInt32|Id товара, на який посилається цей товарний запис. Наприклад, товар-доповнення до певної страви|
+|TopGoodId|Long|Id товара, на який посилається цей товарний запис. Наприклад, товар-доповнення до певної страви|
 |Uktzed|String|Код українського класифікатора товарів зовнішньої економічної діяльності|
 
 ## <a id="table3">Таблиця 3. Запис про знижку або надбавку на суму по товару ([Discount](/Documents/Document.cs))
@@ -136,26 +136,26 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 
 |Ім'я елементу|Тип даних|Опис|
 | :---| :---:| :---|
-|<sup>*</sup>Id|UInt16|ID запису|
-|<sup>*</sup>GoodsItemId|UInt32|ID товара, для якого спрацював маркетинговий інструмент|
-|<sup>*</sup>MarketingActionId|UInt32|ID маркетингової акції|
-|<sup>*</sup>MarketingActionName|String(255)|Назва маркетингової акції|
-|<sup>*</sup>MarketingToolId|UInt32|ID маркетингового інструменту|
-|<sup>*</sup>MarketingToolName|String(255)|Назва маркетингового інструменту|
-|<sup>*</sup>PresentType (Xml: MarketingPresentType)|UInt16|Нумератор типа подарунку|
-|<sup>*</sup>GoodsItemPrice|Double|Запропонована акціонна ціна на товар|
-|<sup>*</sup>PriceColumnNumber|UInt16|Номер колонки прайсу|
-|<sup>*</sup>GiftCode|String(255)|Подарунковий код|
-|<sup>*</sup>PointsPercent|Double|Відсоток балів від суми проданого товара (0...1)|
 |<sup>*</sup>BonusPercent|Double|Відсоток бонусів від суми проданого товара (0...1)|
-|<sup>*</sup>MoneyDiscount|Double|Знижка на ціну в гривнях|
+|<sup>*</sup>GiftCode|String(255)|Подарунковий код|
+|<sup>*</sup>GoodsItemId|Long|ID товара, для якого спрацював маркетинговий інструмент|
+|<sup>*</sup>GoodsItemPrice|Double|Запропонована акціонна ціна на товар|
 |<sup>*</sup>GoodsItemQuantity|Double|Кількість подарованого товара|
+|<sup>*</sup>Id|Long|ID запису|
+|<sup>*</sup>MarketingActionId|Long|ID маркетингової акції|
+|<sup>*</sup>MarketingActionName|String(255)|Назва маркетингової акції|
+|<sup>*</sup>MarketingToolId|Long|ID маркетингового інструменту|
+|<sup>*</sup>MarketingToolName|String(255)|Назва маркетингового інструменту|
+|<sup>*</sup>MoneyDiscount|Double|Знижка на ціну в гривнях|
+|<sup>*</sup>PointsPercent|Double|Відсоток балів від суми проданого товара (0...1)|
+|<sup>*</sup>PresentType (Xml: MarketingPresentType)|Int32|Нумератор типа подарунку|
+|<sup>*</sup>PriceColumnNumber|Int32|Номер колонки прайсу|
 
 ## <a id="table5">Таблиця 5. Запис по відображеному повідомленню від CRM по акціям для клієнта ([MarketingToolRecordDescription](/Marketing/MarketingActionRecord.cs))
 
 |Ім'я елементу|Тип даних|Опис|
 | :---| :---:| :---|
-|<sup>*</sup>Id|UInt32|ID MarketingToolRecord|
+|<sup>*</sup>Id|Long|ID MarketingToolRecord|
 
 ## <a id="table6">Таблиця 6. Нумератор типів документів ([DocumentType](/Documents/Document.cs))
 
@@ -183,9 +183,9 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |<sup>*</sup>AuthCode|String|Код авторизації (до 6 символів)|
 |<sup>*</sup>BankName|String|Назва банку (до 18 символів)|
 |<sup>*</sup>CardNumber|String|Номер картки (до 18 символів)|
-|<sup>*</sup>InvoiceNumber|UInt32|Номер чека.|
+|<sup>*</sup>InvoiceNumber|Int32|Номер чека.|
 |<sup>*</sup>IsSignatureRequired|Bool|Вимагається підпис (true/false)|
-|<sup>*</sup>MerchantId|UInt32|Код продавця|
+|<sup>*</sup>MerchantId|Int32|Код продавця|
 |OtherAdditionalData|String|Інші додаткові дані по транзакції (серіалізовані)|
 |<sup>*</sup>PaymentSystemName|String|Платіжна система (до 18 символів)|
 |<sup>*</sup>PosNumber|String|Номер терміналу (до 18 символів)|
@@ -197,21 +197,21 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |Ім'я елементу          |Тип даних|Опис                                 |
 |                   :---|    :---:|                                 :---|
 |AppVersion             |String   |Назва та версія касового додатку     |
-|CashierId              |UInt32   |ID касира                            |
+|CashierId              |Long   |ID касира                            |
 |ContractorName         |String   |Ім'я контрагента                     |
 |DepartmentBalance      |Double   |Залишок в касі                       |
 |DepartmentName         |String   |Назва торгової точки                 |
 |DocumentSlot           |String   |Номер відкладеного чеку              |
 |ErrorDescription       |String   |Опис помилки                         |
 |ErrorModule            |String   |Місце помилки                        |
-|ErrorNumber            |UInt32   |Номер помилки                        |
+|ErrorNumber            |Long   |Номер помилки                        |
 |GoodsItemAmount        |Double   |Сума по товару                       |
 |GoodsItemBarcode       |String   |Штрихкод товару                      |
 |GoodsItemName          |String   |Назва товару                         |
 |GoodsItemPrice         |Double   |Ціна товару                          |
 |GoodsItemQuantity      |Double   |Кількість товару                     |
 |GoodsItemQuantityReestr|Double   |Поточна кількість товару по реєстру  |
-|Id                     |UInt32   |ID запису                            |
+|Id                     |Long   |ID запису                            |
 |Info                   |String   |Додаткова інформація                 |
 |LogLevel               |Byte     |Рівень логування                     |
 |Message                |String   |Подія                                |

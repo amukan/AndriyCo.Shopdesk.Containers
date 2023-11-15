@@ -23,9 +23,11 @@ namespace AndriyCo.Shopdesk.Containers
         public double GoodsItemQuantity { get; set; }
         public double GoodsItemQuantityReestr { get; set; }
         public int Id { get; set; }
+
         public string Info { get; set; }
         public byte LogLevel { get; set; }
         public string Message { get; set; }
+
         [UnixDate] public DateTime Timestamp { get; set; }
     }
 }

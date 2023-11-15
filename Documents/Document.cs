@@ -67,17 +67,17 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>
         /// Елементарний товар (інгредієнт)
         /// </summary>
-        Ingredient = 1,
+        [XmlEnum(Name = "1")] Ingredient = 1,
 
         /// <summary>
         /// Виріб
         /// </summary>
-        Product = 2,
+        [XmlEnum(Name = "2")] Product = 2,
 
         /// <summary>
         /// Робота/послуга
         /// </summary>
-        Job = 4
+        [XmlEnum(Name = "4")] Job = 4
     }
 
     public enum PaymentMethod : int
@@ -250,6 +250,9 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Бали, нараховані по "інших" товарах, тобто товарах, що продаються поза франшизою, і які продані в цьому чеку
         /// </summary>
         [Money] public double PointsOther { get; set; }
+
+        /// <summary>Номер документа у зміні (нумерація починається з 1 після відкриття зміни, може мати числовий сталий префікс)</summary>
+        public string SessionDocumentNumber { get; set; }
 
         /// <summary>
         /// ID документа, що став підставою для створення поточного. (=0)

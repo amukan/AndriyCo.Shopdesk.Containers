@@ -4,10 +4,13 @@ using AndriyCo.Shopdesk.Containers.Serialization.Xml;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace AndriyCo.Shopdesk.Containers
 {
@@ -21,7 +24,12 @@ namespace AndriyCo.Shopdesk.Containers
     /// </remarks>
     [XmlType("ArrayOfDocument")]
     public class ContainerDto
-    {
+    {  
+        private string hash = string.Empty;
+
+        [XmlAttribute(AttributeName = "address")]
+        public string Address { get; set; }
+
         [XmlAttribute(AttributeName = "docFormatDescription")]
         public string DocFormatDescription
         {
@@ -31,11 +39,6 @@ namespace AndriyCo.Shopdesk.Containers
                 // this property is read only}
             }
         }
-
-        private string hash = string.Empty;
-
-        [XmlAttribute(AttributeName = "address")]
-        public string Address { get; set; }
 
         [XmlElement(ElementName = "Document")]
         public List<Document> Documents { get; set; }
@@ -85,6 +88,10 @@ namespace AndriyCo.Shopdesk.Containers
         [JsonIgnore]
         public string Xsi { get; set; }
 
+        #region Serialization
+
+        #region XML
+
         public string SerializeIntoXml()
         {
             XmlView xmlView = XmlView.Pretty | XmlView.FullClosingEmptyTag;
@@ -92,32 +99,38 @@ namespace AndriyCo.Shopdesk.Containers
             return xml;
         }
 
-        /// <summary>
-        /// Сериалізація у JSON з найуживанішим форматуванням - є відступи, приховуються пусті теги
-        /// </summary>
-        /// <returns></returns>
-        public string SerializeIntoJson()
+        public byte[] SerializeIntoXmlAndZip()
         {
-            JsonView jsonView = JsonView.Pretty
-                                | JsonView.HideNullValue
-                                | JsonView.HideStringEmptyValue;
-            return SerializeIntoJson(jsonView);
+            string xmlString = SerializeIntoXml();
+            byte[] compressedBytes = Compress(xmlString, OriginalFileName);
+            return compressedBytes;
         }
 
+        public static ContainerDto DeserializeXml(string xmlString)
+        {
+            ContainerDto dto = Converter<ContainerDto>.Deserialize(xmlString);
+            return dto;
+        }
+
+        public static ContainerDto DeserializeXml(byte[] zipBytes)
+        {
+            string xml = DecompressXmlString(zipBytes);
+            return DeserializeXml(xml);
+        }
+
+        #endregion XML
+
+        #region JSON
+
         /// <summary>
-        /// Сериалізація у JSON з форматуванням, яке можна тонко налаштувати
+        /// Серіалізація у JSON
         /// </summary>
+        /// <param name="jsonView">Налаштування серіалізації</param>
         /// <returns></returns>
-        public string SerializeIntoJson(JsonView jsonView)
+        public string SerializeIntoJson(JsonView jsonView = JsonView.Pretty | JsonView.HideNullValue | JsonView.HideStringEmptyValue)
         {
             string json = Converter.Serialize(this, jsonView);
             return json;
-        }
-
-        public static ContainerDto DeserializeXml(string xml)
-        {
-            ContainerDto dto = Converter<ContainerDto>.Deserialize(xml);
-            return dto;
         }
 
         public static ContainerDto DeserializeJson(string json)
@@ -125,5 +138,43 @@ namespace AndriyCo.Shopdesk.Containers
             ContainerDto dto = Converter.Deserialize<ContainerDto>(json);
             return dto;
         }
+
+        #endregion JSON
+
+        #endregion Serialization
+
+        #region Compression
+
+        public static byte[] Compress(string xmlString, string fileNameInArchive)
+        {
+            byte[] fileBytes = Encoding.GetEncoding(1251).GetBytes(xmlString);
+            byte[] compressedBytes;
+
+            using (MemoryStream outStream = new())
+            {
+                using (ZipArchive archive = new(outStream, ZipArchiveMode.Create, true))
+                {
+                    ZipArchiveEntry fileInArchive = archive.CreateEntry(fileNameInArchive, CompressionLevel.Optimal);
+                    using Stream entryStream = fileInArchive.Open();
+                    using MemoryStream fileToCompressStream = new(fileBytes);
+                    fileToCompressStream.CopyTo(entryStream);
+                }
+                compressedBytes = outStream.ToArray();
+            }
+            return compressedBytes;
+        }
+
+        public static string DecompressXmlString(byte[] zipBytes)
+        {
+            using MemoryStream zipStream = new(zipBytes);
+            using ZipArchive zipArchive = new(zipStream);
+            ZipArchiveEntry entry = zipArchive.Entries.Single();
+            using var decompressedStream = entry.Open();
+            StreamReader reader = new(decompressedStream, Encoding.GetEncoding(1251));
+            string xmlString = reader.ReadToEnd();
+            return xmlString;
+        }
+
+        #endregion
     }
 }
