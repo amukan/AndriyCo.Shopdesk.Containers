@@ -53,6 +53,8 @@ namespace AndriyCo.Shopdesk.Containers.Marketing
 
         public string MarketingToolName { get; set; }
 
+        public string DescriptionToCustomer { get; set; }
+
         public double MoneyDiscount { get; set; }
 
         public double PointsPercent { get; set; }
@@ -74,4 +76,6 @@ namespace AndriyCo.Shopdesk.Containers.Marketing
     {
         public int Id { get; set; }
     }
+
+
 }

@@ -59,6 +59,18 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "8192")] Production = 8192
     }
 
+    [Flags]
+    public enum EditPermissions : int
+    {
+        None = 0,
+        AddRows = 1,
+        RemoveRows = 2,
+        IncreaseQuantity = 4,
+        DecreaseQuantity = 8,
+        IncreasePrice = 16,
+        DecreasePrice = 32,
+    }
+
     /// <summary>
     /// Тип товару
     /// </summary>
@@ -108,8 +120,10 @@ namespace AndriyCo.Shopdesk.Containers.Documents
     [XmlType("Document")]
     public class Document
     {
-        [XmlElement(IsNullable = true)]
-        public string AdditionalInfo { get; set; }
+        /// <summary>
+        /// Додаткова, будь яка текстова інформація. Примітка.
+        /// </summary>
+        [XmlElement(IsNullable = true)] public string AdditionalInfo { get; set; }
 
         /// <summary>Штрих-код картки агента-продавця</summary>
         public string AgentBarcode { get; set; }
@@ -130,8 +144,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public int Bias { get; set; }
 
         /// <summary>Істина, якщо на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси</summary>
-        [UppercaseTrueFalse]
-        public bool BonusCalculationPrinted { get; set; }
+        [UppercaseTrueFalse] public bool BonusCalculationPrinted { get; set; }
 
         /// <summary>
         /// Сума бонусів, якими додатково розрахувався покупець<br/>
@@ -171,8 +184,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>Назва торгової точки в обліковій системі</summary>
         public string DepartmentName { get; set; }
 
-        [XmlArray(ElementName = "Detail")]
-        public List<DocumentDetail> Details { get; set; }
+        [XmlArray(ElementName = "Detail")] public List<DocumentDetail> Details { get; set; }
 
         /// <summary>Унікальний ідентифікатор документу</summary>
         public Guid DocumentGuid { get; set; }
@@ -182,6 +194,9 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Тип документа</summary>
         public DocumentType DocumentType { get; set; }
+
+        /// <summary>Перелік дозволених операцій редагування для товарного документа</summary>
+        [FlagsSum] public EditPermissions EditPermissions { get; set; }
 
         /// <summary>Фіскальний номер фіскального реєстратора</summary>
         public string FiscalRegisterFiscalNumber { get; set; }
@@ -224,8 +239,12 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public List<LogRecord> LogRecords { get; set; }
 
         /// <summary>Перелік подарунків з маркетингових інструментів, які спрацювали для цього чека</summary>
-        [XmlArray(ElementName = "MarketingActions")]
-        public List<MarketingActionRecord> MarketingActionRecords { get; set; }
+        [XmlArray(ElementName = "MarketingActions")] public List<MarketingActionRecord> MarketingActionRecords { get; set; }
+
+        /// <summary>
+        /// Перелік записів журналу обробки маркетингових інструментів
+        /// </summary>
+        public List<MarketingLogRecord> MarketingLogRecords { get; set; }
 
         /// <summary>
         /// Перелік повідомлень покупцю по періодичних маркетингових інструментах, які спрацювали на сервері та були надруковані у чекові покупця
@@ -266,6 +285,11 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Підстава або коментар</summary>
         public string SupportingDocument { get; set; }
+
+        /// <summary>
+        /// Запланована дата-час видачі замовлення (відвантаження товару)
+        /// </summary>
+        [ShopdeskDate] public DateTime? TimeToIssue { get; set; }
 
         /// <summary>
         /// Унікальний ідентифікатор документа, з яким пов'язаний цей документ (зазвичай для документу оплати, що пов'язаний з товарним документом цього чека)
@@ -328,8 +352,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>
         /// Знижка як різниця між реєстровою ціною та факт. роздрібної у поточному документі. Discount = PrimaryPrice – SalePrice
         /// </summary>
-        [XmlElement("Discount")]
-        [Money] public double Discount { get; set; }
+        [XmlElement("Discount")] [Money] public double Discount { get; set; }
 
         /// <summary>
         /// Колекція записів про знижку/нарахування на суму товару
