@@ -34,64 +34,65 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 
 ## <a id="table1">Таблиця 1. Документ ([Document](/Documents/Document.cs))
 
-|Ім'я елементу|Тип даних|Опис|
-|:---|:---:|:---|
-|AdditionalInfo|String|Додаткова інформація по документу|
-|AgentBarcode|String|Штрих-код картки агенту-продавця|
-|AgentId|Int64|ID торгового агенту-продавця|
-|<sup>*</sup>Amount|Double|Сума за документом|
-|<sup>*</sup>AmountPaid|Double|Сума оплати|
-|BankTransactionInfo (тільки для документів з DocumentType = 8, 16 та PaymentMethod = 1)|Елемент типу [TransactionInfo](#table7)|Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою (див. [Таблицю 7](#table7)). Для інших видів оплати (не картка) може бути відсутній.|
-|<sup>*</sup>Bias|Int32|Часовий пояс, в якому знаходиться каса, в хвилинах|
-|BonusCalculationPrinted|Boolean|Ознака того, що на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси|
-|BonusPaid|Double|Сума бонусної знижки|
-|BonusPaymentRecordId|Int64|ID запису про списання бонусної суми, отриманого від сервісу CRM|
-|<sup>*</sup>ContractorId|Int64|ID клієнта з облікової системи франчайзера. (=0 якщо це CRM клієнт)|
-|CurrencyId|Byte|Валюта оплати|
-|CurrencyRate|Double|Курс валюти|
-|CustomerSegments (тільки для документів з DocumentType = 1)|Колекція елементів CustomerSegment|Перелік сегментів, до яких належить покупець, як учасник програми лояльності у CRM системі|
-|<sup>*</sup>DateOfApprove|Date|Дата та час (місцеві) затвердження чека|
-|<sup>*</sup>DateOfCreate|Date|Дата та час (місцеві) створення чека (вводу першої товарної позиції)|
-|DeliveryPointId|Int64|ID точки доставки|
-|<sup>*</sup>DepartmentId|Int64|ID торгової точки|
-|<sup>*</sup>DepartmentName|String|Назва торгової точки|
-|<sup>*</sup>Details (Xml: Detail) (не обов'язкова для документів з DocumentType = 8, 16, 2048)|Колекція елементів [DocumentDetail](#table2)|Колекція записів з товарами (див. [Таблицю 2](#table2))|
-|<sup>*</sup>DocumentGuid|String|Унікальний ідентифікатор документу|
-|<sup>*</sup>DocumentNumber|String|Номер документа (бухгалтерський, нумерація може скидатись раз на місяць, чи квартал, чи рік)|
-|<sup>*</sup>DocumentType|Int32|Тип документу, нумератор (див. [Таблицю 6](#table6))|
-|FiscalRegisterFiscalNumber|String|Фіскальний номер фіскального реєстратора|
-|FiscalRegisterId|Byte|Нумератор фіскального реєстратора (0...22, докладніше - по запиту)|
-|FiscalRegisterName|String|Назва фіскального реєстратора|
-|FiscalRegisterSerialNumber|String|Серійний номер фіскального реєстратора|
-|FranchiseContractorBarcode|String|Штрих-код картки лояльності клієнта CRM|
-|<sup>*</sup>FranchiseContractorId|Int64|ID клієнта з CRM. (=0 якщо це клієнт з облікової системи франчайзера)|
-|FranchiseContractorPhoneNumber|String|Номер телефону клієнта CRM, наприклад, 380671234567|
-|<sup>*</sup>FranchiseeId|Int64|ID франчайзі|
-|GiftCertificateSumma|Double|Номінал сертифікату.|
-|<sup>*</sup>Id|Int64|Внутрішній номер документу (внутрішній номер в табл. nakl)|
-|<sup>*</sup>IsFiscal|Xml: Byte, Json: Bool|Чек фіскальний (1 або true) або нефіскальний (0 або false)|
-|LogRecords|Колекція елементів [LogRecord](#table8)|Перелік записів журналу каси, які стосуються цього чека (див. [Таблицю 8](#table8))|
-|MarketingLogRecords|Колекція елементів [MarketingLogRecord]|Перелік записів журналу обробки маркетингових інструментів|
-|MarketingActionRecords (Xml: MarketingActions) (тільки для документів з DocumentType = 1)|Колекція елементів [MarketingActionRecord](#table4)|Перелік подарунків з маркетингових інструментів, які спрацювали для цього чека (див. [Таблицю 4](#table7))|
-|MarketingToolRecordDescriptions (тільки для документів з DocumentType = 1)|Колекція елементів [MarketingToolRecordDescription](#table5)|Перелік повідомлень покупцю по періодичних маркетингових інструментах, які спрацювали на сервері та були надруковані у чекові покупця (див. [Таблицю 5](#table5))|
-|<sup>*</sup>PaymentMethod (завжди =0 для товарних документів)|Byte|Форма оплати. 0 - готівка, 1 - безготівкова (картка), 2 - кредит, 3 - сертифікат. **Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0**|
-|PointsFranch|Double|Бали, які були нараховані по товарам франшизи в цьому документі|
-|PointsOther|Double|Бали по решті товарів (не франшизи) цього документа|
-|SessionDocumentNumber|String|Номер документа у зміні (нумерація починається з 1 після відкриття зміни, може мати числовий сталий префікс)|
-|SourceDocumentId|Int64|ID документу, що став підставою для створення поточного. (=0)|
-|<sup>*</sup>Status|Byte|Статус документа (0 - відкладений, 1 - проведений)|
-|SupportingDocument|String|Підстава або коментар|
-|TopDocumentGuid|String|Унікальний ідентифікатор зв'язаного документу (використовується для повернення товарів, посилання на видаткову накладну)|
-|TopDocumentId|Int64|Посилання на ID видаткової накладної в документі оплати|
-|<sup>*</sup>TransactionTypeId|Int64|ID статті руху документа|
-|UserFullName|String|Повне ім'я користувача (касира)|
-|<sup>*</sup>UserID|Int64|ID користувача (касира)|
-|<sup>*</sup>UserName|String|Ім'я користувача (касира)|
+|Ім'я елементу                      |Обов'язковий|Тип даних  	|Опис|
+|:---                               |:---:|:---		    |:---|
+|AdditionalInfo		                |  -  |String     	|Додаткова інформація по документу|
+|AgentBarcode		                |  -  |String	    |Штрих-код картки агенту-продавця|
+|AgentId		                    |  -  |Int64	    |ID торгового агенту-продавця|
+|Amount		            			|  +  |Double	    |Сума за документом|
+|AmountPaid		        			|  +  |Double	    |Сума оплати|
+|BankTransactionInfo (тільки для документів з DocumentType = 8, 16 та PaymentMethod = 1)|  -  |Елемент типу [TransactionInfo](#table7)	|Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою (див. [Таблицю 7](#table7)). Для інших видів оплати (не картка) може бути відсутній.|
+|Bias		            			|  +  |Int32	    |Часовий пояс, в якому знаходиться каса, в хвилинах|
+|BonusCalculationPrinted		    |  -  |Boolean	    |Ознака того, що на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси|
+|BonusPaid		                    |  -  |Double	    |Сума бонусної знижки|
+|BonusPaymentRecordId		        |  -  |Int64	    |ID запису про списання бонусної суми, отриманого від сервісу CRM|
+|ContractorId		    			|  +  |Int64	    |ID клієнта з облікової системи франчайзера. (=0 якщо це CRM клієнт)|
+|CurrencyId		                    |  -  |Byte	    	|Валюта оплати|
+|CurrencyRate		                |  -  |Double	    |Курс валюти|
+|CustomerSegments (тільки для документів з DocumentType = 1)|  -  |Колекція елементів CustomerSegment	|Перелік сегментів, до яких належить покупець, як учасник програми лояльності у CRM системі|
+|DateOfApprove		    			|  +  |Date	    	|Дата та час (місцеві) затвердження чека|
+|DateOfCreate		    			|  +  |Date	    	|Дата та час (місцеві) створення чека (вводу першої товарної позиції)|
+|DeliveryPointId		            |  -  |Int64	    |ID точки доставки|
+|DepartmentId		    			|  +  |Int64	    |ID торгової точки|
+|DepartmentName		    			|  +  |String	    |Назва торгової точки|
+|Details (Xml: Detail) (не обов'язкова для документів з DocumentType = 8, 16, 2048)|  +  |Колекція елементів [DocumentDetail](#table2)	|Колекція записів з товарами (див. [Таблицю 2](#table2))|
+|DocumentGuid		    			|  +  |String	    |Унікальний ідентифікатор документу|
+|DocumentNumber		    			|  +  |String	    |Номер документа (бухгалтерський, нумерація може скидатись раз на місяць, чи квартал, чи рік)|
+|DocumentType		    			|  +  |Int32	    |Тип документу, нумератор (див. [Таблицю 6](#table6))|
+|EditPermissions					|  +  |Int32	    |Права на редагування, нумератор-колекція флагів (див. [EditPermissions](/Documents/Document.cs)). Береться до уваги тільки для документів, які імпортуються із зовнішніх систем.|
+|FiscalRegisterFiscalNumber		    |  -  |String	    |Фіскальний номер фіскального реєстратора|
+|FiscalRegisterId		            |  -  |Byte	    	|Нумератор фіскального реєстратора (0...22, докладніше - по запиту)|
+|FiscalRegisterName		            |  -  |String	    |Назва фіскального реєстратора|
+|FiscalRegisterSerialNumber		    |  -  |String	    |Серійний номер фіскального реєстратора|
+|FranchiseContractorBarcode		    |  -  |String	    |Штрих-код картки лояльності клієнта CRM|
+|FranchiseContractorId  			|  +  |Int64	    |ID клієнта з CRM. (=0 якщо це клієнт з облікової системи франчайзера)|
+|FranchiseContractorPhoneNumber		|  -  |String	    |Номер телефону клієнта CRM, наприклад, 380671234567|
+|FranchiseeId		    			|  +  |Int64	    |ID франчайзі|
+|GiftCertificateSumma		        |  -  |Double	    |Номінал сертифікату.|
+|Id		                			|  +  |Int64	    |Внутрішній номер документу (внутрішній номер в табл. nakl)|
+|IsFiscal		        			|  +  |Xml: Byte, Json: Bool	|Чек фіскальний (1 або true) або нефіскальний (0 або false)|
+|LogRecords		                    |  -  |Колекція елементів [LogRecord](#table8)|Перелік записів журналу каси, які стосуються цього чека (див. [Таблицю 8](#table8))|
+|MarketingActionRecords (Xml: MarketingActions) (тільки для документів з DocumentType = 1)|  -  |Колекція елементів [MarketingActionRecord](#table4)	|Перелік подарунків з маркетингових інструментів, які спрацювали для цього чека (див. [Таблицю 4](#table7))|
+|MarketingLogRecords		        |  -  |Колекція елементів [MarketingLogRecord]|Перелік записів журналу обробки маркетингових інструментів|
+|MarketingToolRecordDescriptions (тільки для документів з DocumentType = 1)|  -  |Колекція елементів [MarketingToolRecordDescription](#table5)|Перелік повідомлень покупцю по періодичних маркетингових інструментах, які спрацювали на сервері та були надруковані у чекові покупця (див. [Таблицю 5](#table5))|
+|PaymentMethod (завжди =0 для товарних документів)|  +  |Byte|Форма оплати. 0 - готівка, 1 - безготівкова (картка), 2 - кредит, 3 - сертифікат. **Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0**|
+|PointsFranch		                |  -  |Double	    |Бали, які були нараховані по товарам франшизи в цьому документі|
+|PointsOther		                |  -  |Double	    |Бали по решті товарів (не франшизи) цього документа|
+|SessionDocumentNumber		        |  -  |String	    |Номер документа у зміні (нумерація починається з 1 після відкриття зміни, може мати числовий сталий префікс)|
+|SourceDocumentId		            |  -  |Int64	    |ID документу, що став підставою для створення поточного. (=0)|
+|Status		            			|  +  |Byte	        |Статус документа (0 - відкладений, 1 - проведений)|
+|SupportingDocument		            |  -  |String	    |Підстава або коментар|
+|TopDocumentGuid		            |  -  |String	    |Унікальний ідентифікатор зв'язаного документу (використовується для повернення товарів, посилання на видаткову накладну)|
+|TopDocumentId		                |  -  |Int64	    |Посилання на ID видаткової накладної в документі оплати|
+|TransactionTypeId					|  +  |Int64	    |ID статті руху документа|
+|UserFullName		                |  -  |String	    |Повне ім'я користувача (касира)|
+|UserID		            			|  +  |Int64	    |ID користувача (касира)|
+|UserName		        			|  +  |String	    |Ім'я користувача (касира)|
 
 ## <a id="table2">Таблиця 2. Запис з товаром ([DocumentDetail](/Documents/Document.cs))
 
-|Ім'я елементу|Тип даних|Опис|
-|                               :---|      :---:| :---| 
+|Ім'я елементу                      |Тип даних  |Опис|
+|:---                               |:---:      |:---| 
 |<sup>*</sup>AmountToPay            |Double     |Сума до оплати товару. Розраховується як добуток *SalePrice* * *Quantity*|
 |Barcode                            |String     |Штрих-код товару|
 |BarcodeId                          |Int64      |ID штрих-коду товару|
@@ -131,75 +132,75 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 
 ## <a id="table3">Таблиця 3. Запис про знижку або надбавку на суму по товару ([Discount](/Documents/Document.cs))
 
-|Ім'я елементу|Тип даних|Опис|
-| :---| :---:| :---|
-|<sup>*</sup>DiscountType|Byte|Тип знижки, енумератор: 0 - Фіксована (дисконтна картка, точне зазначення ціни, тощо.), 1 - Накопичувальна, 2 - Колонка прайсу 1, 3 - Колонка прайсу 2, 4 - Колонка прайсу 3, 5 - Колонка прайсу 4, 6 - Колонка прайсу 5, 7 - Не використовується, 8 - Бонусна знижка, 9 - По сертифікату, 10 - Заокруглення копійок, 11 - Колонка прайсу 6, 12 - Колонка прайсу 7, 13 - Колонка прайсу 8, 14 - Колонка прайсу 9, 15 - Колонка прайсу 10, 16 - Колонка прайсу 11, 17 - Колонка прайсу 12, 18 - Колонка прайсу 13, 19 - Колонка прайсу 14, 20 - Колонка прайсу 15|
-|<sup>*</sup>DiscountValue|Double|Значення знижки/надбавку на суму по товару. Позитивне значення - знижка, від'ємне - надбавка.|
+|Ім'я елементу                      |Тип даних  |Опис|
+|:---                               |:---:      |:---|
+|<sup>*</sup>DiscountType           |Byte       |Тип знижки, енумератор: 0 - Фіксована (дисконтна картка, точне зазначення ціни, тощо.), 1 - Накопичувальна, 2 - Колонка прайсу 1, 3 - Колонка прайсу 2, 4 - Колонка прайсу 3, 5 - Колонка прайсу 4, 6 - Колонка прайсу 5, 7 - Не використовується, 8 - Бонусна знижка, 9 - По сертифікату, 10 - Заокруглення копійок, 11 - Колонка прайсу 6, 12 - Колонка прайсу 7, 13 - Колонка прайсу 8, 14 - Колонка прайсу 9, 15 - Колонка прайсу 10, 16 - Колонка прайсу 11, 17 - Колонка прайсу 12, 18 - Колонка прайсу 13, 19 - Колонка прайсу 14, 20 - Колонка прайсу 15|
+|<sup>*</sup>DiscountValue          |Double     |Значення знижки/надбавку на суму по товару. Позитивне значення - знижка, від'ємне - надбавка.|
 
 ## <a id="table4">Таблиця 4. Запис по маркетинговій акції та маркетинговому інструменту, яким задовольняє чек ([MarketingActionRecord](/Marketing/MarketingActionRecord.cs))
 
-|Ім'я елементу|Тип даних|Опис|
-| :---| :---:| :---|
-|<sup>*</sup>BonusPercent|Double|Відсоток бонусів від суми проданого товара (0...1)|
-|<sup>*</sup>GiftCode|String(255)|Подарунковий код|
-|<sup>*</sup>GoodsItemId|Int64|ID товара, для якого спрацював маркетинговий інструмент|
-|<sup>*</sup>GoodsItemPrice|Double|Запропонована акціонна ціна на товар|
-|<sup>*</sup>GoodsItemQuantity|Double|Кількість подарованого товара|
-|<sup>*</sup>Id|Int64|ID запису|
-|<sup>*</sup>MarketingActionId|Int64|ID маркетингової акції|
-|<sup>*</sup>MarketingActionName|String(255)|Назва маркетингової акції|
-|<sup>*</sup>MarketingToolId|Int64|ID маркетингового інструменту|
-|<sup>*</sup>MarketingToolName|String(255)|Назва маркетингового інструменту|
-|<sup>*</sup>MoneyDiscount|Double|Знижка на ціну в гривнях|
-|<sup>*</sup>PointsPercent|Double|Відсоток балів від суми проданого товара (0...1)|
+|Ім'я елементу                      |Тип даних  |Опис|
+|:---                               |:---:      |:---|
+|<sup>*</sup>BonusPercent           |Double     |Відсоток бонусів від суми проданого товара (0...1)|
+|<sup>*</sup>GiftCode               |String(255)|Подарунковий код|
+|<sup>*</sup>GoodsItemId            |Int64      |ID товара, для якого спрацював маркетинговий інструмент|
+|<sup>*</sup>GoodsItemPrice         |Double     |Запропонована акціонна ціна на товар|
+|<sup>*</sup>GoodsItemQuantity      |Double     |Кількість подарованого товара|
+|<sup>*</sup>Id                     |Int64      |ID запису|
+|<sup>*</sup>MarketingActionId      |Int64      |ID маркетингової акції|
+|<sup>*</sup>MarketingActionName    |String(255)|Назва маркетингової акції|
+|<sup>*</sup>MarketingToolId        |Int64      |ID маркетингового інструменту|
+|<sup>*</sup>MarketingToolName      |String(255)|Назва маркетингового інструменту|
+|<sup>*</sup>MoneyDiscount          |Double     |Знижка на ціну в гривнях|
+|<sup>*</sup>PointsPercent          |Double|Відсоток балів від суми проданого товара (0...1)|
 |<sup>*</sup>PresentType (Xml: MarketingPresentType)|Int32|Нумератор типа подарунку|
-|<sup>*</sup>PriceColumnNumber|Int32|Номер колонки прайсу|
+|<sup>*</sup>PriceColumnNumber      |Int32|Номер колонки прайсу|
 
 ## <a id="table5">Таблиця 5. Запис по відображеному повідомленню від CRM по акціям для клієнта ([MarketingToolRecordDescription](/Marketing/MarketingActionRecord.cs))
 
-|Ім'я елементу|Тип даних|Опис|
-| :---| :---:| :---|
-|<sup>*</sup>Id|Int64|ID MarketingToolRecord|
+|Ім'я елементу                      |Тип даних  |Опис|
+|:---                               |:---:      |:---|
+|<sup>*</sup>Id                     |Int64      |ID MarketingToolRecord|
 
 ## <a id="table6">Таблиця 6. Нумератор типів документів ([DocumentType](/Documents/Document.cs))
 
-|Ім'я елементу|Опис|
-| :---| :---|
-|AnyDocument = 0|Не використовується|
-|SalesInvoice = 1|Видаткова накладна|
-|PurchaseInvoice = 2|Прибуткова накладна|
-|CustomerOrder = 4|Замовлення від клієнта|
-|PayInSlip = 8|Прибутковий касовий ордер|
-|PayOutOrder = 16|Видатковий касовий ордер|
-|PurchaseOrder = 32|Замовлення постачальнику|
-|CustomerReturnOrder = 64|Повернення від покупця|
-|SupplierReturnOrder = 128|Повернення постачальнику|
-|Correction = 256|Перерахунок залишків|
-|Revaluation = 512|Переоцінка|
-|GoodsTransferNote = 1024|Накладна на передачу|
-|TransferOrder = 2048|Касовий ордер на передачу|
+|Ім'я елементу              |Опис|
+|:---                       |:---                       |
+|AnyDocument = 0            |Не використовується        |
+|SalesInvoice = 1           |Видаткова накладна         |
+|PurchaseInvoice = 2        |Прибуткова накладна        |
+|CustomerOrder = 4          |Замовлення від клієнта     |
+|PayInSlip = 8              |Прибутковий касовий ордер  |
+|PayOutOrder = 16           |Видатковий касовий ордер   |
+|PurchaseOrder = 32         |Замовлення постачальнику   |
+|CustomerReturnOrder = 64   |Повернення від покупця     |
+|SupplierReturnOrder = 128  |Повернення постачальнику   |
+|Correction = 256           |Перерахунок залишків       |
+|Revaluation = 512          |Переоцінка                 |
+|GoodsTransferNote = 1024   |Накладна на передачу       |
+|TransferOrder = 2048       |Касовий ордер на передачу  |
 
 ## <a id="table7">Таблиця 7. Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою ([TransactionInfo](/Bank/TransactionInfo.cs))
 
-|Ім'я елементу|Тип даних|Опис|
-| :---| :---:| :---|
-|<sup>*</sup>Amount|Double|Сума транзакції|
-|<sup>*</sup>AuthCode|String|Код авторизації (до 6 символів)|
-|<sup>*</sup>BankName|String|Назва банку (до 18 символів)|
-|<sup>*</sup>CardNumber|String|Номер картки (до 18 символів)|
-|<sup>*</sup>InvoiceNumber|Int32|Номер чека.|
-|<sup>*</sup>IsSignatureRequired|Bool|Вимагається підпис (true/false)|
-|<sup>*</sup>MerchantId|Int32|Код продавця|
-|OtherAdditionalData|String|Інші додаткові дані по транзакції (серіалізовані)|
-|<sup>*</sup>PaymentSystemName|String|Платіжна система (до 18 символів)|
-|<sup>*</sup>PosNumber|String|Номер терміналу (до 18 символів)|
-|<sup>*</sup>RRN|String|Код RRN транзакції (до 12 символів)|
-|<sup>*</sup>TransactionDate|String|Дата транзакції (у форматі відповіді ПС).|
+|Ім'я елементу                      |Тип даних  |Опис|
+|:---                               |:---:      |:---|
+|<sup>*</sup>Amount                 |Double     |Сума транзакції|
+|<sup>*</sup>AuthCode               |String     |Код авторизації (до 6 символів)|
+|<sup>*</sup>BankName               |String     |Назва банку (до 18 символів)|
+|<sup>*</sup>CardNumber             |String     |Номер картки (до 18 символів)|
+|<sup>*</sup>InvoiceNumber          |Int32      |Номер чека.|
+|<sup>*</sup>IsSignatureRequired    |Bool       |Вимагається підпис (true/false)|
+|<sup>*</sup>MerchantId             |Int32      |Код продавця|
+|OtherAdditionalData                |String     |Інші додаткові дані по транзакції (серіалізовані)|
+|<sup>*</sup>PaymentSystemName      |String     |Платіжна система (до 18 символів)|
+|<sup>*</sup>PosNumber              |String     |Номер терміналу (до 18 символів)|
+|<sup>*</sup>RRN                    |String     |Код RRN транзакції (до 12 символів)|
+|<sup>*</sup>TransactionDate        |String     |Дата транзакції (у форматі відповіді ПС).|
 
 ## <a id="table8">Таблиця 8. Запис журналу дій касира ([LogRecord](/LogRecord.cs))
 
 |Ім'я елементу          |Тип даних|Опис                                 |
-|                   :---|    :---:|                                 :---|
+|:---                   |:---:    |:---                                 |
 |AppVersion             |String   |Назва та версія касового додатку     |
 |CashierId              |Int64    |ID касира                            |
 |ContractorName         |String   |Ім'я контрагента                     |
