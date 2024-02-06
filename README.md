@@ -103,7 +103,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |DocumentDetailGuid                 | + |Guid       |Унікальний ідентифікатор товарного запису|
 |DocumentId                         | + |Int64      |Посилання на документ, який містить запис|
 |ExciseMarkBarcode                  | - |String     |Штрих-код акцизної марки|
-|FranchGoodId                       | - |Int64      |ID товару CRM|
+|FranchGoodId                       | + |Int64      |ID товару CRM|
 |GoodId                             | + |Int64      |ID товару|
 |GoodsCategoryId                    | + |Int64      |ID групи товару|
 |GoodsItemName                      | + |String     |Назва товару|
