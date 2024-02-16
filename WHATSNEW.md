@@ -12,3 +12,4 @@
 
 * 2023-10-04: Серіалізація елемента DocFormatDescription в XML.
 * 2023-11-15: Уточнення типів даних.
+* 2024-02-16:$${\color{red}Welcome \space \color{lightblue}To \space \color{orange}Stackoverflow}$$
