@@ -64,9 +64,9 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |FiscalRegisterId		            | - |Byte	|Нумератор фіскального реєстратора (0...22, докладніше - по запиту)|
 |FiscalRegisterName		            | - |String	|Назва фіскального реєстратора|
 |FiscalRegisterSerialNumber		    | - |String	|Серійний номер фіскального реєстратора|
-|FranchiseContractorBarcode		    | - |String	|Штрих-код картки лояльності клієнта CRM|
+|FranchiseContractorBarcode		    | + |String	|Штрих-код картки лояльності клієнта CRM. Якщо значення немає, вузол може бути порожнім, але має бути присутнім.|
 |FranchiseContractorId  			| + |Int64	|ID клієнта з CRM. (=0 якщо це клієнт з облікової системи франчайзера)|
-|FranchiseContractorPhoneNumber		| - |String	|Номер телефону клієнта CRM, наприклад, 380671234567|
+|FranchiseContractorPhoneNumber		| + |String	|Номер телефону клієнта CRM, наприклад, 380671234567. Якщо значення немає, вузол може бути порожнім, але має бути присутнім.|
 |FranchiseeId		    			| + |Int64	|ID франчайзі|
 |GiftCertificateSumma		        | - |Double	|Номінал сертифікату.|
 |Id		                			| + |Int64	|Внутрішній номер документу (внутрішній номер в табл. nakl)|
