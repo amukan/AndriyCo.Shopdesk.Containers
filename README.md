@@ -43,7 +43,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |AmountPaid		        			| + |Double	|Сума оплати|
 |BankTransactionInfo (тільки для документів з DocumentType = 8, 16 та PaymentMethod = 1)| - |Елемент типу [TransactionInfo](#table7)	|Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою (див. [Таблицю 7](#table7)). Для інших видів оплати (не картка) може бути відсутній.|
 |Bias		            			| + |Int32	|Часовий пояс, в якому знаходиться каса, в хвилинах|
-|BonusCalculationPrinted		    | - |Boolean|Ознака того, що на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси|
 |BonusFranch		                | - |Double	|Бонуси, нараховані по товарах франшизи, що продані в цьому чеку|
 |BonusOther		                    | - |Double	|Бонуси по решті товарів - по товарах, що продаються поза франшизою, і які продані в цьому чеку|
 |BonusPaid		                    | - |Double	|Сума бонусної знижки|
@@ -117,7 +116,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |MaxAllowedPrice                    | - |Double     |Максимальна дозволена ціна на товар за даними облікової системи. Значення присутнє тільки у документах продажу.|
 |MinAllowedPrice                    | - |Double     |Мінімальна дозволена ціна товару. Розраховується як *MinAllowedPrice = PrimaryPrice * (1 - MaxAllowedDiscountPercent)* Значення присутнє тільки у документах продажу.|
 |MoneySum                           | + |Double     |Сума оплати однією з форм оплати (як різниця між сумою товару та бонусною часткою в оплаті)|
-|PointsSum                          | - |Double     |Бали, нараховані за товар|
 |PrimaryPrice                       | - |Double     |Початкова ціна товару. У чеку продажу тут реєстрова ціна, у чеку повернення - ціна, за якою товар було продано, з урахуванням усіх знижок на ціну під час продажу, крім знижки/нарахування на суму в результаті округлення копійками.|
 |PurchasePrice                      | - |Double     |Закупівельна ціна (для документу Прибуткова накладна)|
 |Quantity                           | + |Double     |Кількість в цьому товарному записі (для документів крім "різницевий перерахунок залишків")|
@@ -235,7 +233,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <Amount>20.40</Amount>
     <AmountPaid>20.40</AmountPaid>
     <Bias>0</Bias>
-    <BonusCalculationPrinted>False</BonusCalculationPrinted>
     <BonusFranch>0.00</BonusFranch>
     <BonusOther>0.00</BonusOther>
     <BonusPaid>0.00</BonusPaid>
@@ -282,7 +279,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
         <MaxAllowedPrice>0.00</MaxAllowedPrice>
         <MinAllowedPrice>36.90</MinAllowedPrice>
         <MoneySum>20.40</MoneySum>
-        <PointsSum>0.04</PointsSum>
         <PrimaryPrice>36.9</PrimaryPrice>
         <PurchasePrice>0</PurchasePrice>
         <Quantity>1.018</Quantity>
@@ -331,7 +327,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <Amount>20.40</Amount>
     <AmountPaid>20.40</AmountPaid>
     <Bias>0</Bias>
-    <BonusCalculationPrinted>False</BonusCalculationPrinted>
     <BonusFranch>0.00</BonusFranch>
     <BonusOther>0.00</BonusOther>
     <BonusPaid>0.00</BonusPaid>
@@ -395,7 +390,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "AmountPaid": 20.4,
       "BankTransactionInfo": null,
       "Bias": 0,
-      "BonusCalculationPrinted": false,
       "BonusFranch": 0.0,
       "BonusOther": 0.0,
       "BonusPaid": 0.0,
@@ -443,7 +437,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
           "MaxAllowedPrice": 0.0,
           "MinAllowedPrice": 36.9,
           "MoneySum": 20.4,
-          "PointsSum": 0.04,
           "PrimaryPrice": 36.9,
           "PurchasePrice": 0.0,
           "Quantity": 1.018,
@@ -492,7 +485,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "AmountPaid": 20.4,
       "BankTransactionInfo": null,
       "Bias": 0,
-      "BonusCalculationPrinted": false,
       "BonusFranch": 0.0,
       "BonusOther": 0.0,
       "BonusPaid": 0.0,

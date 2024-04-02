@@ -7,7 +7,7 @@
 * 2024-01-24: MarketingLogRecord - Перелік записів журналу обробки маркетингових інструментів.
 * 2024-01-24: GoodsItemType - Тип товару.
 * 2024-01-29: EditPermissions - Права на редагування, нумератор-колекція флагів.
-* 2024-04-02: BonusFranch, BonusOther.
+* 2024-04-02: BonusFranch та BonusOther.
 
 # Виправлено:
 
@@ -16,4 +16,4 @@
 
 # Видалено:
 
-* 2024-04-02: Видалено PointsFranch та PointsOther.
+* 2024-04-02: BonusCalculationPrinted, PointsFranch та PointsOther, PointsSum.
