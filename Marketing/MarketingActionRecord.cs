@@ -19,12 +19,6 @@ namespace AndriyCo.Shopdesk.Containers.Marketing
         [XmlEnum(Name = "11")] BonusAsPercentFromAmount = 11
     }
 
-    //[XmlType("MarketingActions")]
-    //public class MarketingActions
-    //{
-    //    public MarketingActionRecord MarketingActionRecord { get; set; }
-    //}
-
     [XmlType("MarketingActionRecord")]
     public class MarketingActionRecord
     {
@@ -57,16 +51,10 @@ namespace AndriyCo.Shopdesk.Containers.Marketing
 
         public double MoneyDiscount { get; set; }
 
-        public double PointsPercent { get; set; }
-
         /// <summary>Кількість нарахованих бонусів</summary>
         [XmlElement("MarketingPresentedBonus")] public double PresentedBonus { get; set; }
 
-        /// <summary>Кількість нарахованих балів</summary>
-        [XmlElement("MarketingPresentedPoints")] public double PresentedPoints { get; set; }
-
-        [XmlElement("MarketingPresentType")]
-        public PresentType PresentType { get; set; }
+        [XmlElement("MarketingPresentType")] public PresentType PresentType { get; set; }
 
         public int PriceColumnNumber { get; set; }
     }
@@ -76,6 +64,4 @@ namespace AndriyCo.Shopdesk.Containers.Marketing
     {
         public int Id { get; set; }
     }
-
-
 }

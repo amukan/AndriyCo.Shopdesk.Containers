@@ -7,7 +7,7 @@
 DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де: 
 
 * DOC_D – видаткова накладна з (або без) оплатою – звичайний чек продажу
-* DOC_INVENTORY_D - інвентаризація
+* DOC_INVENTORY_D - інвентаризація (перерахунок залишків)
 * DOC_CUSTOMERORDER_D - замовлення від покупця
 * DOC_ORDER_D - замовлення постачальнику
 * DOC_PAYIN_D – службовий чек внесення коштів
@@ -44,6 +44,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |BankTransactionInfo (тільки для документів з DocumentType = 8, 16 та PaymentMethod = 1)| - |Елемент типу [TransactionInfo](#table7)	|Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою (див. [Таблицю 7](#table7)). Для інших видів оплати (не картка) може бути відсутній.|
 |Bias		            			| + |Int32	|Часовий пояс, в якому знаходиться каса, в хвилинах|
 |BonusCalculationPrinted		    | - |Boolean|Ознака того, що на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси|
+|BonusFranch		                | - |Double	|Бонуси, нараховані по товарах франшизи, що продані в цьому чеку|
+|BonusOther		                    | - |Double	|Бонуси по решті товарів - по товарах, що продаються поза франшизою, і які продані в цьому чеку|
 |BonusPaid		                    | - |Double	|Сума бонусної знижки|
 |BonusPaymentRecordId		        | - |Int64	|ID запису про списання бонусної суми, отриманого від сервісу CRM|
 |ContractorId		    			| + |Int64	|ID клієнта з облікової системи франчайзера. (=0 якщо це CRM клієнт)|
@@ -76,8 +78,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |MarketingLogRecords		        | - |Колекція елементів [MarketingLogRecord]|Перелік записів журналу обробки маркетингових інструментів|
 |MarketingToolRecordDescriptions (тільки для документів з DocumentType = 1)| - |Колекція елементів [MarketingToolRecordDescription](#table5)|Перелік повідомлень покупцю по періодичних маркетингових інструментах, які спрацювали на сервері та були надруковані у чекові покупця (див. [Таблицю 5](#table5))|
 |PaymentMethod (завжди =0 для товарних документів)| + |Byte|Форма оплати. 0 - готівка, 1 - безготівкова (картка), 2 - кредит, 3 - сертифікат. **Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0**|
-|PointsFranch		                | - |Double	|Бали, які були нараховані по товарам франшизи в цьому документі|
-|PointsOther		                | - |Double	|Бали по решті товарів (не франшизи) цього документа|
 |SessionDocumentNumber		        | - |String	|Номер документа у зміні (нумерація починається з 1 після відкриття зміни, може мати числовий сталий префікс)|
 |SourceDocumentId		            | - |Int64	|ID документу, що став підставою для створення поточного. (=0)|
 |Status		            			| + |Byte	|Статус документа (0 - відкладений, 1 - проведений)|
@@ -220,7 +220,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |Info                   |String   |Додаткова інформація                 |
 |LogLevel               |Byte     |Рівень логування                     |
 |Message                |String   |Подія                                |
-|Timestamp              |DateTime |Дата та час запису у форматі UnixDate (yyyy-MM-ddTHH:mm:ss.fff)|
+|Timestamp              |DateTime |Дата та час запису у форматі UnixDate (*yyyy-MM-ddTHH:mm:ss.fff*)|
 
 ## <a id="addition1">Додаток 1. Зразок файлу (*.TCUDOC), що містить чек та його оплату (XML)
 
@@ -236,6 +236,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <AmountPaid>20.40</AmountPaid>
     <Bias>0</Bias>
     <BonusCalculationPrinted>False</BonusCalculationPrinted>
+    <BonusFranch>0.00</BonusFranch>
+    <BonusOther>0.00</BonusOther>
     <BonusPaid>0.00</BonusPaid>
     <BonusPaymentRecordId>0</BonusPaymentRecordId>
     <ContractorId>111</ContractorId>
@@ -330,6 +332,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <AmountPaid>20.40</AmountPaid>
     <Bias>0</Bias>
     <BonusCalculationPrinted>False</BonusCalculationPrinted>
+    <BonusFranch>0.00</BonusFranch>
+    <BonusOther>0.00</BonusOther>
     <BonusPaid>0.00</BonusPaid>
     <BonusPaymentRecordId>0</BonusPaymentRecordId>
     <ContractorId>111</ContractorId>
@@ -360,8 +364,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <MarketingActions></MarketingActions>
     <MarketingToolRecordDescriptions></MarketingToolRecordDescriptions>
     <PaymentMethod>0</PaymentMethod>
-    <PointsFranch>0.00</PointsFranch>
-    <PointsOther>0.00</PointsOther>
     <SourceDocumentId>0</SourceDocumentId>
     <Status>1</Status>
     <SupportingDocument>Оплата накладної №70659 від 2020-08-29 11:32:20</SupportingDocument>
@@ -394,6 +396,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "BankTransactionInfo": null,
       "Bias": 0,
       "BonusCalculationPrinted": false,
+      "BonusFranch": 0.0,
+      "BonusOther": 0.0,
       "BonusPaid": 0.0,
       "BonusPaymentRecordId": 0,
       "ContractorId": 111,
@@ -470,8 +474,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "MarketingActionRecords": [],
       "MarketingToolRecordDescriptions": [],
       "PaymentMethod": 0,
-      "PointsFranch": 0.0,
-      "PointsOther": 0.0,
       "SourceDocumentId": 0,
       "Status": 1,
       "SupportingDocument": "",
@@ -491,6 +493,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "BankTransactionInfo": null,
       "Bias": 0,
       "BonusCalculationPrinted": false,
+      "BonusFranch": 0.0,
+      "BonusOther": 0.0,
       "BonusPaid": 0.0,
       "BonusPaymentRecordId": 0,
       "ContractorId": 111,
@@ -521,8 +525,6 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "MarketingActionRecords": [],
       "MarketingToolRecordDescriptions": [],
       "PaymentMethod": 0,
-      "PointsFranch": 0.0,
-      "PointsOther": 0.0,
       "SourceDocumentId": 0,
       "Status": 1,
       "SupportingDocument": "Оплата накладної №70659 від 2020-08-29 11:32:20",

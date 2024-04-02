@@ -3,8 +3,10 @@ using AndriyCo.Shopdesk.Containers.Marketing;
 using AndriyCo.Shopdesk.Containers.Serialization.Xml.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace AndriyCo.Shopdesk.Containers.Documents
@@ -19,34 +21,34 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// </summary>
         AnyDocument = 0,
 
-        /// <summary>видаткова накладна</summary>
+        /// <summary>Видаткова накладна</summary>
         [XmlEnum(Name = "1")] SalesInvoice = 1,
 
-        /// <summary>прибуткова накладна</summary>
+        /// <summary>Прибуткова накладна</summary>
         [XmlEnum(Name = "2")] PurchaseInvoice = 2,
 
-        /// <summary>замовлення від покупця</summary>
+        /// <summary>Замовлення від покупця</summary>
         [XmlEnum(Name = "4")] CustomerOrder = 4,
 
-        /// <summary>прибутковий касовий ордер</summary>
+        /// <summary>Прибутковий касовий ордер</summary>
         [XmlEnum(Name = "8")] PayInSlip = 8,
 
-        /// <summary>видатковий касовий ордер</summary>
+        /// <summary>Видатковий касовий ордер</summary>
         [XmlEnum(Name = "16")] PayOutOrder = 16,
 
-        /// <summary>замовлення постачальнику</summary>
+        /// <summary>Замовлення постачальнику</summary>
         [XmlEnum(Name = "32")] PurchaseOrder = 32,
 
-        /// <summary>повернення від покупця</summary>
+        /// <summary>Повернення від покупця</summary>
         [XmlEnum(Name = "64")] CustomerReturnOrder = 64,
 
-        /// <summary>повернення постачальнику</summary>
+        /// <summary>Повернення постачальнику</summary>
         [XmlEnum(Name = "128")] SupplierReturnOrder = 128,
 
-        /// <summary>переоблік залишків</summary>
+        /// <summary>Переоблік залишків</summary>
         [XmlEnum(Name = "256")] Correction = 256,
 
-        /// <summary>переоцінка</summary>
+        /// <summary>Переоцінка</summary>
         [XmlEnum(Name = "512")] Revaluation = 512,
 
         /// <summary>Накладна на передачу</summary>
@@ -56,19 +58,22 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "2048")] TransferOrder = 2048,
 
         /// <summary>Виробництво</summary>
-        [XmlEnum(Name = "8192")] Production = 8192
+        [XmlEnum(Name = "8192")] Production = 8192,
+
+        /// <summary>Прибутковий касовий ордер (попереднє утримання оплати по картці)</summary>
+        [XmlEnum(Name = "65536")] PayInSlipHold = 65536
     }
 
     [Flags]
     public enum EditPermissions : int
     {
-        None = 0,
-        AddRows = 1,
-        RemoveRows = 2,
-        IncreaseQuantity = 4,
-        DecreaseQuantity = 8,
-        IncreasePrice = 16,
-        DecreasePrice = 32,
+        [XmlEnum(Name = "0")] None = 0,
+        [XmlEnum(Name = "1")] AddRows = 1,
+        [XmlEnum(Name = "2")] RemoveRows = 2,
+        [XmlEnum(Name = "4")] IncreaseQuantity = 4,
+        [XmlEnum(Name = "8")] DecreaseQuantity = 8,
+        [XmlEnum(Name = "16")] IncreasePrice = 16,
+        [XmlEnum(Name = "32")] DecreasePrice = 32,
     }
 
     /// <summary>
@@ -99,7 +104,8 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "2")] Credit = 2,
         [XmlEnum(Name = "3")] GiftCertificate = 3,
         [XmlEnum(Name = "4")] Bonus = 4,
-        [XmlEnum(Name = "5")] BankTransfer = 5
+        [XmlEnum(Name = "5")] BankTransfer = 5,
+        [XmlEnum(Name = "6")] CardOnline = 6
     }
 
     [XmlType("Item")]
@@ -144,7 +150,19 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public int Bias { get; set; }
 
         /// <summary>Істина, якщо на касі в чеку надруковано повідомлення про нараховані на початку місяця бонуси</summary>
-        [UppercaseTrueFalse] public bool BonusCalculationPrinted { get; set; }
+        [UppercaseTrueFalse]
+        [Obsolete("Нарахування бонусів з балів більше не використовується. Тому ця ознака в нових версія використовуватись не повинно.")]
+        public bool BonusCalculationPrinted { get; set; }
+
+        /// <summary>
+        /// Бонуси, нараховані по товарах франшизи, що продані в цьому чеку
+        /// </summary>
+        [Money] public double BonusFranch { get; set; }
+
+        /// <summary>
+        /// Бонуси, нараховані по "інших" товарах, тобто товарах, що продаються поза франшизою, і які продані в цьому чеку
+        /// </summary>
+        [Money] public double BonusOther { get; set; }
 
         /// <summary>
         /// Сума бонусів, якими додатково розрахувався покупець<br/>
@@ -263,12 +281,12 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>
         /// Бали, нараховані по товарах франшизи, що продані в цьому чеку
         /// </summary>
-        [Money] public double PointsFranch { get; set; }
+        [Obsolete("Балів більше нема. Використовуйте BonusFranch.")] [Money] public double PointsFranch { get; set; }
 
         /// <summary>
         /// Бали, нараховані по "інших" товарах, тобто товарах, що продаються поза франшизою, і які продані в цьому чеку
         /// </summary>
-        [Money] public double PointsOther { get; set; }
+        [Obsolete("Балів більше нема. Використовуйте BonusOther.")] [Money] public double PointsOther { get; set; }
 
         /// <summary>Номер документа у зміні (нумерація починається з 1 після відкриття зміни, може мати числовий сталий префікс)</summary>
         public string SessionDocumentNumber { get; set; }
@@ -345,6 +363,9 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Бонусна частка в оплаті за товар</summary>
         [Money] public double BonusSum { get; set; }
+
+        /// <summary>Бонуси, нараховані за товар</summary>
+        [Money] public double CalculatedBonus { get; set; }
 
         /// <summary>Поточна кількість товару точці на момент продажу (довідниково)</summary>
         [Quantity] public double CurrentQuantity { get; set; }
@@ -437,6 +458,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [Money] public double MoneySum { get; set; }
 
         /// <summary>Бали, нараховані за товар</summary>
+        [Obsolete("Балів більше немає. Використовуйте CalculatedBonus.")]
         [Money] public double PointsSum { get; set; }
 
         /// <summary>
