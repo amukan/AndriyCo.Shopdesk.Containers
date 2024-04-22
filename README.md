@@ -140,7 +140,10 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |Ім'я елементу|[req](## "Обов'язкове поле: '+' - так, '-' - ні")|Тип даних|Опис|
 |:---|:---:|:---|:---|
 |BonusPercent           | + |Double     |Відсоток бонусів від суми проданого товара (0...1)|
-|GiftCode               | + |String(255)|Подарунковий код|
+|DescriptionToCustomer  | - |String(255)|Повідомлення покупцю|
+|DiscountPercent        | + |Double     |Знижка у відсотках (0...1)|
+|DocumentDetailGuid     | - |Guid       |Унікальний ідентифікатор товарного запису, до якого відноситься запис по маркетинговій акції та маркетинговому інструменту|
+|GiftCode               | - |String(255)|Подарунковий код|
 |GoodsItemId            | + |Int64      |ID товара, для якого спрацював маркетинговий інструмент|
 |GoodsItemPrice         | + |Double     |Запропонована акціонна ціна на товар|
 |GoodsItemQuantity      | + |Double     |Кількість подарованого товара|
@@ -150,8 +153,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |MarketingToolId        | + |Int64      |ID маркетингового інструменту|
 |MarketingToolName      | + |String(255)|Назва маркетингового інструменту|
 |MoneyDiscount          | + |Double     |Знижка на ціну в гривнях|
-|PointsPercent          | + |Double|Відсоток балів від суми проданого товара (0...1)|
-|PresentType (`Xml`: MarketingPresentType)| + |Int32|Нумератор типа подарунку|
+|PresentedBonus (`Xml`: MarketingPresentedBonus)| + |Double|Кількість нарахованих бонусів|
+|PresentType (`Xml`: MarketingPresentType)      | + |Int32 |Нумератор типа подарунку|
 |PriceColumnNumber      | + |Int32|Номер колонки прайсу|
 
 ## <a id="table5">Таблиця 5. Запис по відображеному повідомленню від CRM по акціям для клієнта ([MarketingToolRecordDescription](/Marketing/MarketingActionRecord.cs))
