@@ -108,6 +108,27 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "6")] CardOnline = 6
     }
 
+    /// <summary>
+    /// Канал продажу
+    /// </summary>
+    public enum SaleChannel : int
+    {
+        /// <summary>Не визначено</summary>
+        [XmlEnum(Name = "0")] NotSet = 0,
+
+        /// <summary>Каса</summary>
+        [XmlEnum(Name = "1")] PointOfSale = 1,
+
+        /// <summary>Електронна торгівля, веб-сайт</summary>
+        [XmlEnum(Name = "2")] ECommerce = 2,
+
+        /// <summary>QR меню</summary>
+        [XmlEnum(Name = "4")] QrMenu = 4,
+
+        /// <summary>Торговий автомат</summary>
+        [XmlEnum(Name = "8")] VendingMachine = 8
+    }
+
     [XmlType("Item")]
     public class Discount
     {
@@ -279,14 +300,9 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public PaymentMethod PaymentMethod { get; set; }
 
         /// <summary>
-        /// Бали, нараховані по товарах франшизи, що продані в цьому чеку
+        /// Канал продажу (каса, QR Меню, E-Commerce, Vending Machine тощо)
         /// </summary>
-        [Obsolete("Балів більше нема. Використовуйте BonusFranch.")] [Money] public double PointsFranch { get; set; }
-
-        /// <summary>
-        /// Бали, нараховані по "інших" товарах, тобто товарах, що продаються поза франшизою, і які продані в цьому чеку
-        /// </summary>
-        [Obsolete("Балів більше нема. Використовуйте BonusOther.")] [Money] public double PointsOther { get; set; }
+        public SaleChannel SaleChannel { get; set; }
 
         /// <summary>Номер документа у зміні (нумерація починається з 1 після відкриття зміни, може мати числовий сталий префікс)</summary>
         public string SessionDocumentNumber { get; set; }
@@ -373,7 +389,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>
         /// Знижка як різниця між реєстровою ціною та факт. роздрібної у поточному документі. Discount = PrimaryPrice – SalePrice
         /// </summary>
-        [XmlElement("Discount")] [Money] public double Discount { get; set; }
+        [XmlElement("Discount")][Money] public double Discount { get; set; }
 
         /// <summary>
         /// Колекція записів про знижку/нарахування на суму товару
@@ -456,10 +472,6 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Сума оплати однією з форм оплати (як різниця між сумою товару та бонусною часткою в оплаті)
         /// </summary>
         [Money] public double MoneySum { get; set; }
-
-        /// <summary>Бали, нараховані за товар</summary>
-        [Obsolete("Балів більше немає. Використовуйте CalculatedBonus.")]
-        [Money] public double PointsSum { get; set; }
 
         /// <summary>
         /// Початкова ціна товару<br/>
