@@ -24,7 +24,7 @@ namespace AndriyCo.Shopdesk.Containers
     /// </remarks>
     [XmlType("ArrayOfDocument")]
     public class ContainerDto
-    {  
+    {
         private string hash = string.Empty;
 
         [XmlAttribute(AttributeName = "address")]
@@ -176,5 +176,23 @@ namespace AndriyCo.Shopdesk.Containers
         }
 
         #endregion
+
+        public string CreateFileName()
+        {
+            Document document = this.Documents.FirstOrDefault();
+            if (document == null)
+                return "";
+
+            string infoPart = $"{document.Id}_F{document.FranchiseeId}_P{document.DepartmentId}_{document.DateOfApprove:yyyy-MM-dd_HH_mm_ss}.tcudoc";
+
+            if (document.DocumentType == DocumentType.SalesInvoice)
+                return $"DOC_D{infoPart}";
+
+            if (document.DocumentType == DocumentType.ShippingDeclaration)
+                return $"DOC_SHIPPINGDECL_D{infoPart}";
+
+            return "";
+        }
+
     }
 }

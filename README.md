@@ -19,6 +19,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 * DOC_RETURNTOSUPPLIER_D – повернення товару постачальнику
 * DOC_REVALUATION_D - переоцінка
 * DOC_TRANSFER_D – передача товару на іншу торгову точку
+* DOC_SHIPPINGDECL_D - декларація на прихід від постачальника
 * Номер документу (товарний та касові документи мають один номер в межах цього контейнеру) (D70659), 
 * ID франчайзі (F11)
 * ID торгової точки (P1000000826)
@@ -79,10 +80,11 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |PaymentMethod (завжди =0 для товарних документів)| + |Byte|Форма оплати. 0 - готівка, 1 - безготівкова (картка), 2 - кредит, 3 - сертифікат. **Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0**|
 |SaleChannel		                | + |Int32	|Канал продажу (1 - каса, 2 - E-Commerce, 4 - QR Меню, 8 - Vending Machine тощо)|
 |SessionDocumentNumber		        | - |String	|Номер документа у зміні (нумерація починається з 1 після відкриття зміни, може мати числовий сталий префікс)|
-|SourceDocumentId		            | - |Int64	|ID документу, що став підставою для створення поточного. (=0)|
+|SourceDocumentGuid					| - |Guid	|Унікальний ідентифікатор документа, що став підставою для створення поточного|
+|SourceDocumentId		            | - |Int64	|ID документу, що став підставою для створення поточного (=0)|
 |Status		            			| + |Byte	|Статус документа (0 - відкладений, 1 - проведений)|
 |SupportingDocument		            | - |String	|Підстава або коментар|
-|TopDocumentGuid		            | - |String	|Унікальний ідентифікатор зв'язаного документу (використовується для повернення товарів, посилання на видаткову накладну)|
+|TopDocumentGuid		            | - |Guid	|Унікальний ідентифікатор зв'язаного документу (використовується для повернення товарів, посилання на видаткову накладну)|
 |TopDocumentId		                | - |Int64	|Посилання на ID видаткової накладної в документі оплати|
 |TransactionTypeId					| + |Int64	|ID статті руху документа|
 |UserFullName		                | - |String	|Повне ім'я користувача (касира)|
@@ -126,6 +128,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |QuantityPack                       | - |Double     |Кількість упаковок (=0)|
 |SalePrice                          | + |Double     |Фактична роздрібна ціна з урахуванням усіх знижок. Це ціна для облікової системи, оскільки може мати багато знаків після коми. У цій ціні враховано всі знижки та округлення, які застосовуються до суми товару. Добуток *SalePrice* та *Quantity* дасть точну суму до оплати товару *AmountToPay*.|
 |SalePriceAfterRevaluation          | - |Double     |Ціна після переоцінки (для документа переоцінки). Ненульове значення має тільки документ переоцінки.|
+|SourceDocumentDetailGuid           | - |Guid       |Guid товарного запису в документі, що став підставою для створення поточного документа, і з якого створено цей товарний запис|
 |TopDocumentDetailGuid              | - |Guid       |Guid товарного запису, на який посилається цей товарний запис. Наприклад, товар-доповнення до певної страви|
 |TopGoodId                          | - |Int64      |Id товара, на який посилається цей товарний запис. Наприклад, товар-доповнення до певної страви|
 |Uktzed                             | - |String     |Код українського класифікатора товарів зовнішньої економічної діяльності|
@@ -182,6 +185,9 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |Revaluation = 512          |Переоцінка                 |
 |GoodsTransferNote = 1024   |Накладна на передачу       |
 |TransferOrder = 2048       |Касовий ордер на передачу  |
+|Production = 8192          |Виробництво                |
+|PayInSlipHold = 65536      |Прибутковий касовий ордер (попереднє утримання оплати по картці)|
+|ShippingDeclaration = 131072 |Декларація на прихід від постачальника|
 
 ## <a id="table7">Таблиця 7. Докладна інформація по банківській транзакції та платіжному терміналу при оплаті карткою ([TransactionInfo](/Bank/TransactionInfo.cs))
 
@@ -292,6 +298,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
         <QuantityPack>0.000</QuantityPack>
         <SalePrice>20.0392927308448</SalePrice>
         <SalePriceAfterRevaluation>0.00</SalePriceAfterRevaluation>
+        <SourceDocumentDetailGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentDetailGuid>
+        <TopDocumentDetailGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></TopDocumentDetailGuid>
         <TopGoodId>0</TopGoodId>
       </DocumentDetail>
     </Detail>
@@ -315,6 +323,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <PaymentMethod>0</PaymentMethod>
     <PointsFranch>0.00</PointsFranch>
     <PointsOther>0.00</PointsOther>
+	<SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
     <SourceDocumentId>0</SourceDocumentId>
     <Status>1</Status>
     <SupportingDocument></SupportingDocument>
@@ -364,6 +373,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <MarketingActions></MarketingActions>
     <MarketingToolRecordDescriptions></MarketingToolRecordDescriptions>
     <PaymentMethod>0</PaymentMethod>
+	<SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
     <SourceDocumentId>0</SourceDocumentId>
     <Status>1</Status>
     <SupportingDocument>Оплата накладної №70659 від 2020-08-29 11:32:20</SupportingDocument>
@@ -450,6 +460,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
           "QuantityPack": 0.0,
           "SalePrice": 20.0392927308448,
           "SalePriceAfterRevaluation": 0.0,
+		  "SourceDocumentDetailGuid: null,
+		  "TopDocumentDetailGuid": null,
           "TopGoodId": 0,
           "Uktzed": null
         }
@@ -472,6 +484,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "MarketingActionRecords": [],
       "MarketingToolRecordDescriptions": [],
       "PaymentMethod": 0,
+	  "SourceDocumentGuid": null,
       "SourceDocumentId": 0,
       "Status": 1,
       "SupportingDocument": "",
@@ -522,6 +535,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "MarketingActionRecords": [],
       "MarketingToolRecordDescriptions": [],
       "PaymentMethod": 0,
+	  "SourceDocumentGuid": null,
       "SourceDocumentId": 0,
       "Status": 1,
       "SupportingDocument": "Оплата накладної №70659 від 2020-08-29 11:32:20",

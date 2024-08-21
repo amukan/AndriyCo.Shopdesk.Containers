@@ -1,5 +1,6 @@
 ﻿using AndriyCo.Shopdesk.Containers.Bank;
 using AndriyCo.Shopdesk.Containers.Marketing;
+using AndriyCo.Shopdesk.Containers.Resources;
 using AndriyCo.Shopdesk.Containers.Serialization.Xml.Attributes;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,10 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "8192")] Production = 8192,
 
         /// <summary>Прибутковий касовий ордер (попереднє утримання оплати по картці)</summary>
-        [XmlEnum(Name = "65536")] PayInSlipHold = 65536
+        [XmlEnum(Name = "65536")] PayInSlipHold = 65536,
+
+        /// <summary>Декларація на прихід від постачальника</summary>
+        [XmlEnum(Name = "131072")] ShippingDeclaration = 131072,
     }
 
     [Flags]
@@ -127,6 +131,18 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Торговий автомат</summary>
         [XmlEnum(Name = "8")] VendingMachine = 8
+    }
+
+    public static class SaleChannelExtensions
+    {
+        public static string GetDescription(this SaleChannel saleChannel) => saleChannel switch
+        {
+            SaleChannel.PointOfSale => CommonTranslator.PointOfSale,
+            SaleChannel.ECommerce => CommonTranslator.ECommerce,
+            SaleChannel.QrMenu => CommonTranslator.QrMenu,
+            SaleChannel.VendingMachine => CommonTranslator.VendingMachine,
+            _ => string.Empty,
+        };
     }
 
     [XmlType("Item")]
@@ -198,7 +214,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public long ContractorId { get; set; }
 
         /// <summary>Валюта оплати</summary>
-        public byte CurrencyId { get; set; }
+        public long CurrencyId { get; set; }
 
         /// <summary>Курс валюти</summary>
         public double CurrencyRate { get; set; }
@@ -311,6 +327,11 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// ID документа, що став підставою для створення поточного. (=0)
         /// </summary>
         public long SourceDocumentId { get; set; }
+
+        /// <summary>
+        /// Guid документа, що став підставою для створення поточного
+        /// </summary>
+        public Guid? SourceDocumentGuid { get; set; }
 
         /// <summary>
         /// Статус документа (0 - відкладений, 1 - проведений)
@@ -508,6 +529,8 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Ціна після переоцінки (для документа переоцінки). Значення присутнє тільки у документах переоцінки.</summary>
         [Money] public double SalePriceAfterRevaluation { get; set; }
+        /// <summary>Guid товарного запису в документі, що став підставою для створення поточного документа, і з якого створено цей товарний запис</summary>
+        public Guid? SourceDocumentDetailGuid { get; set; }
 
         /// <summary>Guid товарного запису, на який посилається цей товарний запис</summary>
         /// <remarks>Наприклад, товар-доповнення до певної страви</remarks>
