@@ -460,7 +460,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
           "QuantityPack": 0.0,
           "SalePrice": 20.0392927308448,
           "SalePriceAfterRevaluation": 0.0,
-		  "SourceDocumentDetailGuid: null,
+		  "SourceDocumentDetailGuid": null,
 		  "TopDocumentDetailGuid": null,
           "TopGoodId": 0,
           "Uktzed": null
