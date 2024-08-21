@@ -373,7 +373,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <MarketingActions></MarketingActions>
     <MarketingToolRecordDescriptions></MarketingToolRecordDescriptions>
     <PaymentMethod>0</PaymentMethod>
-	<SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
+    <SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
     <SourceDocumentId>0</SourceDocumentId>
     <Status>1</Status>
     <SupportingDocument>Оплата накладної №70659 від 2020-08-29 11:32:20</SupportingDocument>
@@ -460,8 +460,8 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
           "QuantityPack": 0.0,
           "SalePrice": 20.0392927308448,
           "SalePriceAfterRevaluation": 0.0,
-		  "SourceDocumentDetailGuid": null,
-		  "TopDocumentDetailGuid": null,
+          "SourceDocumentDetailGuid": null,
+          "TopDocumentDetailGuid": null,
           "TopGoodId": 0,
           "Uktzed": null
         }
@@ -535,7 +535,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "MarketingActionRecords": [],
       "MarketingToolRecordDescriptions": [],
       "PaymentMethod": 0,
-	  "SourceDocumentGuid": null,
+      "SourceDocumentGuid": null,
       "SourceDocumentId": 0,
       "Status": 1,
       "SupportingDocument": "Оплата накладної №70659 від 2020-08-29 11:32:20",
