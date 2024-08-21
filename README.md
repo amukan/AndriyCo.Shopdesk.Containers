@@ -323,7 +323,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <PaymentMethod>0</PaymentMethod>
     <PointsFranch>0.00</PointsFranch>
     <PointsOther>0.00</PointsOther>
-	<SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
+    <SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
     <SourceDocumentId>0</SourceDocumentId>
     <Status>1</Status>
     <SupportingDocument></SupportingDocument>
@@ -484,7 +484,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "MarketingActionRecords": [],
       "MarketingToolRecordDescriptions": [],
       "PaymentMethod": 0,
-	  "SourceDocumentGuid": null,
+      "SourceDocumentGuid": null,
       "SourceDocumentId": 0,
       "Status": 1,
       "SupportingDocument": "",
