@@ -61,7 +61,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |DocumentGuid		    			| + |String	|Унікальний ідентифікатор документу|
 |DocumentNumber		    			| + |String	|Номер документа (бухгалтерський, нумерація може скидатись раз на місяць, чи квартал, чи рік)|
 |DocumentType		    			| + |Int32	|Тип документу, нумератор (див. [Таблицю 6](#table6))|
-|EditPermissions					| + |Int32	|Права на редагування, нумератор-колекція флагів (див. [EditPermissions](/Documents/Document.cs)). Береться до уваги тільки для документів, які імпортуються із зовнішніх систем.|
+|EditPermissions					| + |(`Xml`: Перелік Int32 (занчення флагів) через пробіл) (`Json`: Int32)|Права на редагування, нумератор-колекція флагів (див. [EditPermissions](/Documents/Document.cs)). Береться до уваги тільки для документів, які імпортуються із зовнішніх систем. Приклад значення повного переліку прав для **XML: <EditPermissions>1 2 4 8 16 32</EditPermissions>**, Приклад значення повного переліку прав для **JSON: "EditPermissions": 61**|
 |FiscalRegisterFiscalNumber		    | - |String	|Фіскальний номер фіскального реєстратора|
 |FiscalRegisterId		            | - |Byte	|Нумератор фіскального реєстратора (0...22, докладніше - по запиту)|
 |FiscalRegisterName		            | - |String	|Назва фіскального реєстратора|
@@ -243,7 +243,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <AgentId>0</AgentId>
     <Amount>20.40</Amount>
     <AmountPaid>20.40</AmountPaid>
-    <Bias>0</Bias>
+    <Bias>-180</Bias>
     <BonusFranch>0.00</BonusFranch>
     <BonusOther>0.00</BonusOther>
     <BonusPaid>0.00</BonusPaid>
@@ -323,7 +323,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <PaymentMethod>0</PaymentMethod>
     <PointsFranch>0.00</PointsFranch>
     <PointsOther>0.00</PointsOther>
-    <SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
+	<SourceDocumentGuid p3:nil="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
     <SourceDocumentId>0</SourceDocumentId>
     <Status>1</Status>
     <SupportingDocument></SupportingDocument>
@@ -340,7 +340,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <AgentId>0</AgentId>
     <Amount>20.40</Amount>
     <AmountPaid>20.40</AmountPaid>
-    <Bias>0</Bias>
+    <Bias>-180</Bias>
     <BonusFranch>0.00</BonusFranch>
     <BonusOther>0.00</BonusOther>
     <BonusPaid>0.00</BonusPaid>
@@ -373,7 +373,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
     <MarketingActions></MarketingActions>
     <MarketingToolRecordDescriptions></MarketingToolRecordDescriptions>
     <PaymentMethod>0</PaymentMethod>
-    <SourceDocumentGuid p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
+    <SourceDocumentGuid p3:nil="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance"></SourceDocumentGuid>
     <SourceDocumentId>0</SourceDocumentId>
     <Status>1</Status>
     <SupportingDocument>Оплата накладної №70659 від 2020-08-29 11:32:20</SupportingDocument>
@@ -404,7 +404,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "Amount": 20.4,
       "AmountPaid": 20.4,
       "BankTransactionInfo": null,
-      "Bias": 0,
+      "Bias": -180,
       "BonusFranch": 0.0,
       "BonusOther": 0.0,
       "BonusPaid": 0.0,
@@ -502,7 +502,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
       "Amount": 20.4,
       "AmountPaid": 20.4,
       "BankTransactionInfo": null,
-      "Bias": 0,
+      "Bias": -180,
       "BonusFranch": 0.0,
       "BonusOther": 0.0,
       "BonusPaid": 0.0,
