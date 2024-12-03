@@ -20,7 +20,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>Тип документа</summary>
         public DocumentType DocumentType { get; set; }
 
-        public string DocumentTypeDescription {  get; set; }
+        public string DocumentTypeDescription { get; set; }
 
         /// <summary>Id підрозділу</summary>
         public long DepartmentId { get; set; }
@@ -43,5 +43,17 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Дата-час створення чека на касі (місцевий час)</summary>
         [ShopdeskDate] public DateTime DateOfCreate { get; set; }
+
+        /// <summary>Id контейнера чека, який створений на підставі цього замовлення покупця</summary>
+        public long? ChequeContainerId { get; set; }
+
+        /// <summary>Guid чека, який створений на підставі цього замовлення покупця</summary>
+        public Guid? ChequeGuid { get; set; }
+
+        /// <summary>Дата продажу чека на касі, який створений на підставі цього замовлення покупця</summary>
+        public DateTime? ChequeDateOfApprove { get; set; }
+
+        /// <summary>Ім'я файлу чека, який створений на підставі цього замовлення покупця</summary>
+        public string ChequeFileName { get; set; }
     }
 }

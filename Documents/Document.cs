@@ -251,7 +251,10 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public DocumentType DocumentType { get; set; }
 
         /// <summary>Перелік дозволених операцій редагування для товарного документа</summary>
-        [FlagsSum] public EditPermissions EditPermissions { get; set; }
+        /// <remarks>
+        /// Значення флагів для xml представлені як колекція значень через пробіл
+        /// </remarks>
+        public EditPermissions EditPermissions { get; set; }
 
         /// <summary>Фіскальний номер фіскального реєстратора</summary>
         public string FiscalRegisterFiscalNumber { get; set; }
@@ -403,6 +406,11 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Бонуси, нараховані за товар</summary>
         [Money] public double CalculatedBonus { get; set; }
+
+        /// <summary>
+        /// Відсоток нарахування бонусів відносно суми оплати (зазвичай береться з такого ж параметру групи товарів, до якої належить цей товар)
+        /// </summary>
+        public double BonusGeneratePercent { get; set; }
 
         /// <summary>Поточна кількість товару точці на момент продажу (довідниково)</summary>
         [Quantity] public double CurrentQuantity { get; set; }
