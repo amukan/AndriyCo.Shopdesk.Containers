@@ -111,8 +111,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "3")] GiftCertificate = 3,
         [XmlEnum(Name = "4")] Bonus = 4,
         [XmlEnum(Name = "5")] BankTransfer = 5,
-        [XmlEnum(Name = "6")] CardOnline = 6,
-        [XmlEnum(Name = "7")] Cashless = 7
+        [XmlEnum(Name = "6")] CardOnline = 6
     }
 
     /// <summary>
