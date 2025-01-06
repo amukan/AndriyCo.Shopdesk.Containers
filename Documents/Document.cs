@@ -80,6 +80,8 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "32")] DecreasePrice = 32,
     }
 
+
+
     /// <summary>
     /// Тип товару
     /// </summary>
@@ -109,7 +111,8 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "3")] GiftCertificate = 3,
         [XmlEnum(Name = "4")] Bonus = 4,
         [XmlEnum(Name = "5")] BankTransfer = 5,
-        [XmlEnum(Name = "6")] CardOnline = 6
+        [XmlEnum(Name = "6")] CardOnline = 6,
+        [XmlEnum(Name = "7")] Cashless = 7
     }
 
     /// <summary>
@@ -418,7 +421,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>
         /// Знижка як різниця між реєстровою ціною та факт. роздрібної у поточному документі. Discount = PrimaryPrice – SalePrice
         /// </summary>
-        [XmlElement("Discount")][Money] public double Discount { get; set; }
+        [XmlElement("Discount")] [Money] public double Discount { get; set; }
 
         /// <summary>
         /// Колекція записів про знижку/нарахування на суму товару
@@ -537,6 +540,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Ціна після переоцінки (для документа переоцінки). Значення присутнє тільки у документах переоцінки.</summary>
         [Money] public double SalePriceAfterRevaluation { get; set; }
+
         /// <summary>Guid товарного запису в документі, що став підставою для створення поточного документа, і з якого створено цей товарний запис</summary>
         public Guid? SourceDocumentDetailGuid { get; set; }
 
