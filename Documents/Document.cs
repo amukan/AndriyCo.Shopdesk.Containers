@@ -80,8 +80,6 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "32")] DecreasePrice = 32,
     }
 
-
-
     /// <summary>
     /// Тип товару
     /// </summary>
@@ -103,14 +101,45 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "4")] Job = 4
     }
 
+    /// <summary>
+    /// Форми та види оплат
+    /// </summary>
+    /// <remarks>
+    /// Існує дві форми оплати: готівка та безготівка.<br/>
+    /// Безготівка (все окрім готівки) може бути карткою, кредитом, подарунковим сертифікатом, банківським переказом і т.д.<br/>
+    ///</remarks>
     public enum PaymentMethod : int
     {
+        /// <summary>
+        /// Готівка
+        /// </summary>
         [XmlEnum(Name = "0")] Cash = 0,
+        /// <summary>
+        /// Картка через POS-термінал на касі
+        /// </summary>
         [XmlEnum(Name = "1")] Card = 1,
+        /// <summary>
+        /// Кредит
+        /// </summary>
+        /// <remarks>
+        /// Дехто використовує для доставщиків
+        /// </remarks>
         [XmlEnum(Name = "2")] Credit = 2,
+        /// <summary>
+        /// Оплата подарунковим сертифікатом
+        /// </summary>
         [XmlEnum(Name = "3")] GiftCertificate = 3,
+        /// <summary>
+        /// Оплата бонусами в контексті програми лояльності або бонусна знижка в контексті фіскального обліку
+        /// </summary>
         [XmlEnum(Name = "4")] Bonus = 4,
+        /// <summary>
+        /// Банковський переказ (з рахунку на рахунок)
+        /// </summary>
         [XmlEnum(Name = "5")] BankTransfer = 5,
+        /// <summary>
+        /// Оплата карткою через інтернет (онлайн)
+        /// </summary>
         [XmlEnum(Name = "6")] CardOnline = 6
     }
 
@@ -214,6 +243,9 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>ID клієнта з облікової системи франчайзі (=0 якщо це CRM клієнт)</summary>
         public long ContractorId { get; set; }
+
+        /// <summary>Ім'я клієнта з облікової системи франчайзі (порожнє, якщо це CRM клієнт)</summary>
+        public string ContractorName { get; set; }
 
         /// <summary>Валюта оплати</summary>
         public long CurrencyId { get; set; }
@@ -329,14 +361,14 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public string SessionDocumentNumber { get; set; }
 
         /// <summary>
-        /// ID документа, що став підставою для створення поточного. (=0)
-        /// </summary>
-        public long SourceDocumentId { get; set; }
-
-        /// <summary>
         /// Guid документа, що став підставою для створення поточного
         /// </summary>
         public Guid? SourceDocumentGuid { get; set; }
+
+        /// <summary>
+        /// ID документа, що став підставою для створення поточного. (=0)
+        /// </summary>
+        public long SourceDocumentId { get; set; }
 
         /// <summary>
         /// Статус документа (0 - відкладений, 1 - проведений)
@@ -403,16 +435,16 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>Id штрих-коду товару у таблиці штрих-кодів бази даних облікової системи франчайзі</summary>
         public long BarcodeId { get; set; }
 
+        /// <summary>
+        /// Відсоток нарахування бонусів відносно суми оплати (зазвичай береться з такого ж параметру групи товарів, до якої належить цей товар)
+        /// </summary>
+        public double BonusGeneratePercent { get; set; }
+
         /// <summary>Бонусна частка в оплаті за товар</summary>
         [Money] public double BonusSum { get; set; }
 
         /// <summary>Бонуси, нараховані за товар</summary>
         [Money] public double CalculatedBonus { get; set; }
-
-        /// <summary>
-        /// Відсоток нарахування бонусів відносно суми оплати (зазвичай береться з такого ж параметру групи товарів, до якої належить цей товар)
-        /// </summary>
-        public double BonusGeneratePercent { get; set; }
 
         /// <summary>Поточна кількість товару точці на момент продажу (довідниково)</summary>
         [Quantity] public double CurrentQuantity { get; set; }
