@@ -4,10 +4,7 @@ using AndriyCo.Shopdesk.Containers.Resources;
 using AndriyCo.Shopdesk.Containers.Serialization.Xml.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.Serialization;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace AndriyCo.Shopdesk.Containers.Documents
@@ -68,15 +65,43 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "131072")] ShippingDeclaration = 131072,
     }
 
+    /// <summary>
+    /// Дозволи на редагування товарного документа, який вивантажений на касовий сервер із зовнішньої системи, і буде редагуватись на касі
+    /// </summary>
     [Flags]
     public enum EditPermissions : int
     {
+        /// <summary>
+        /// Жодних редагувань не дозволено
+        /// </summary>
         [XmlEnum(Name = "0")] None = 0,
+        /// <summary>
+        /// Дозволено додавати рядки товарів до товарного документа
+        /// </summary>
         [XmlEnum(Name = "1")] AddRows = 1,
+        /// <summary>
+        /// Дозволено видаляти рядки товарів з товарного документа
+        /// </summary>
         [XmlEnum(Name = "2")] RemoveRows = 2,
+
+        /// <summary>
+        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// </summary>
         [XmlEnum(Name = "4")] IncreaseQuantity = 4,
+
+        /// <summary>
+        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// </summary>
         [XmlEnum(Name = "8")] DecreaseQuantity = 8,
+
+        /// <summary>
+        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// </summary>
         [XmlEnum(Name = "16")] IncreasePrice = 16,
+
+        /// <summary>
+        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// </summary>
         [XmlEnum(Name = "32")] DecreasePrice = 32,
     }
 
@@ -114,10 +139,12 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Готівка
         /// </summary>
         [XmlEnum(Name = "0")] Cash = 0,
+
         /// <summary>
         /// Картка через POS-термінал на касі
         /// </summary>
         [XmlEnum(Name = "1")] Card = 1,
+
         /// <summary>
         /// Кредит
         /// </summary>
@@ -125,18 +152,22 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Дехто використовує для доставщиків
         /// </remarks>
         [XmlEnum(Name = "2")] Credit = 2,
+
         /// <summary>
         /// Оплата подарунковим сертифікатом
         /// </summary>
         [XmlEnum(Name = "3")] GiftCertificate = 3,
+
         /// <summary>
         /// Оплата бонусами в контексті програми лояльності або бонусна знижка в контексті фіскального обліку
         /// </summary>
         [XmlEnum(Name = "4")] Bonus = 4,
+
         /// <summary>
         /// Банковський переказ (з рахунку на рахунок)
         /// </summary>
         [XmlEnum(Name = "5")] BankTransfer = 5,
+
         /// <summary>
         /// Оплата карткою через інтернет (онлайн)
         /// </summary>
@@ -264,8 +295,16 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>Дата-час створення чека на касі (місцевий час)</summary>
         [ShopdeskDate] public DateTime DateOfCreate { get; set; }
 
+        /// <summary>Адреса доставки для покупця</summary>
+        public string DeliveryAddress { get; set; }
+
         /// <summary>Id точки доставки в обліковій системі франчайзі</summary>
+        /// <remarks>Для дистриб'юції</remarks>
         public long DeliveryPointId { get; set; }
+
+        /// <summary>Компанія, що здійснює доставку</summary>
+        /// <remarks>Глово, Болт тощо</remarks>
+        public string DeliveryProvider { get; set; }
 
         /// <summary>Id торгової точки в обліковій системі</summary>
         public long DepartmentId { get; set; }
@@ -345,6 +384,11 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Такий собі зворотній зв'язок, щоб знати, де і коли були надруковані повідомлення
         /// </remarks>
         public List<MarketingToolRecord> MarketingToolRecordDescriptions { get; set; }
+
+        /// <summary>
+        /// Повідомлення від покупця для оператора (продавця, касира, кухаря, кур'єра тощо)
+        /// </summary>
+        public string MessageFromCustomer { get; set; }
 
         ///<summary>
         ///Форма оплати. 0 - готівка, 1 – безготівкова (картка), 2 – кредит, 3 – сертифікат.<br/>
@@ -452,7 +496,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>
         /// Знижка як різниця між реєстровою ціною та факт. роздрібної у поточному документі. Discount = PrimaryPrice – SalePrice
         /// </summary>
-        [XmlElement("Discount")] [Money] public double Discount { get; set; }
+        [XmlElement("Discount")][Money] public double Discount { get; set; }
 
         /// <summary>
         /// Колекція записів про знижку/нарахування на суму товару
@@ -466,6 +510,14 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Посилання на документ, який містить запис
         /// </summary>
         public long DocumentId { get; set; }
+
+        /// <summary>
+        /// Дозволи на редагування кількості та ціни, якщо документ надійшов із зовнішньої системи
+        /// </summary>
+        /// <remarks>
+        /// Labor in vain
+        /// </remarks>
+        public EditDetailRestrictions EditDetailRestrictions { get; set; }
 
         /// <summary>Штрих-код акцизної марки</summary>
         public string ExciseMarkBarcode { get; set; }
@@ -583,5 +635,67 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Код українського класифікатора товарів зовнішньо економічної діяльності</summary>
         public string Uktzed { get; set; }
+    }
+
+    /// <summary>
+    /// Обмеження на редагування товарного запису в документі
+    /// </summary>
+    public class EditDetailRestrictions
+    {
+        /// <summary>
+        /// Діапазон редагування ціни товару у відсотках відносно реєстрової ціни
+        /// </summary>
+        public PercentTolerance PricePercentTolerance { get; set; }
+
+        /// <summary>
+        /// Діапазон редагування кількості товару у відсотках відносно поточної кількості
+        /// </summary>
+        public PercentTolerance QuantityPercentTolerance { get; set; }
+    }
+
+    /// <summary>
+    /// Діапазон допусків редагування значень
+    /// </summary>
+    public class PercentTolerance
+    {
+        private double? decreasePercent = 1;
+        private double? increasePercent = null;
+        /// <summary>
+        /// Відсоток зменшення. Не може бути від'ємним або більшим за 1.
+        /// </summary>
+        /// <remarks>
+        /// Лише від 0 до 1. 1 - це 100%, 0 - це 0%.<br/>
+        /// 0 означає, що зменшення не допускається.<br/>
+        /// </remarks>
+        public double? DecreasePercent
+        {
+            get => decreasePercent.GetValueOrDefault(1);
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException($"{nameof(DecreasePercent)} '{value}' is incorrect. It cannot be negative.");
+                if (value > 1)
+                    throw new ArgumentException($"{nameof(DecreasePercent)} '{value}' is incorrect. It cannot be great than 1.");
+
+                decreasePercent = value.GetValueOrDefault(1);
+            }
+        }
+
+        /// <summary>
+        /// Відсоток збільшення. Не може бути від'ємним.
+        /// </summary>
+        /// <remarks>
+        /// 1 - це 100%, 0.1 - це 10%
+        /// </remarks>
+        public double? IncreasePercent
+        {
+            get => increasePercent;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException($"{nameof(IncreasePercent)} '{value}' is incorrect. It cannot be negative.");
+                increasePercent = value;
+            }
+        }
     }
 }
