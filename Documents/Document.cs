@@ -85,22 +85,22 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "2")] RemoveRows = 2,
 
         /// <summary>
-        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// Дозвіл на збільшення кількості товару в товарному документі
         /// </summary>
         [XmlEnum(Name = "4")] IncreaseQuantity = 4,
 
         /// <summary>
-        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// Дозвіл на зменшення кількості товару в товарному документі
         /// </summary>
         [XmlEnum(Name = "8")] DecreaseQuantity = 8,
 
         /// <summary>
-        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// Дозвіл на збільшення ціни товару в товарному документі
         /// </summary>
         [XmlEnum(Name = "16")] IncreasePrice = 16,
 
         /// <summary>
-        /// Цей флаг більше не використовується. Використовуйте EditDetailRestrictions у Detail.
+        /// Дозвіл на зменшення ціни товару в товарному документі
         /// </summary>
         [XmlEnum(Name = "32")] DecreasePrice = 32,
     }
@@ -390,6 +390,11 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// </summary>
         public string MessageFromCustomer { get; set; }
 
+        /// <summary>
+        /// Кількість приборів для замовлення покупця (виделки, ложки, палички тощо)
+        /// </summary>
+        public int NumberOfUtensils { get; set; }
+
         ///<summary>
         ///Форма оплати. 0 - готівка, 1 – безготівкова (картка), 2 – кредит, 3 – сертифікат.<br/>
         ///Увага! Внаслідок того, що чек може містити декілька ПКО з різними формами оплати, коректне значення PaymentMethod має тільки касовий документ, для товарного документа PaymentMethod завжди =0
@@ -512,10 +517,10 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public long DocumentId { get; set; }
 
         /// <summary>
-        /// Дозволи на редагування кількості та ціни, якщо документ надійшов із зовнішньої системи
+        /// Налаштування обмежень для кількості та ціни товару, якщо є дозволи на редагування кількості або ціни (EditPermissions) на рівні документа.
         /// </summary>
         /// <remarks>
-        /// Labor in vain
+        /// Якщо дозволи на редагування в EditPermissions відсутні, ігнорується.<br/>
         /// </remarks>
         public EditDetailRestrictions EditDetailRestrictions { get; set; }
 
@@ -638,7 +643,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
     }
 
     /// <summary>
-    /// Обмеження на редагування товарного запису в документі
+    /// Обмеження на редагування товарного запису
     /// </summary>
     public class EditDetailRestrictions
     {
