@@ -402,6 +402,16 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         public PaymentMethod PaymentMethod { get; set; }
 
         /// <summary>
+        /// Перелік промокодів, запропонованих покупцем у цьому чеку
+        /// </summary>
+        /// <remarks>
+        /// Якщо промокод було застосовано, то в MarketingActionRecords буде відповідний запис про спрацювання маркетингового інструменту, пов'язаного з цим промокодом.
+        /// <br/>
+        /// Тут в переліку пишемо всі промокоди, які були запропоновані покупцем, незалежно від того, чи спрацював якийсь з них чи ні.
+        /// </remarks>
+        public List<string> PromoCodes { get; set; } = new();
+
+        /// <summary>
         /// Канал продажу (каса, QR Меню, E-Commerce, Vending Machine тощо)
         /// </summary>
         public SaleChannel SaleChannel { get; set; }
