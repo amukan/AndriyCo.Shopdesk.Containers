@@ -644,6 +644,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         /// <summary>Guid товарного запису, на який посилається цей товарний запис</summary>
         /// <remarks>Наприклад, товар-доповнення до певної страви</remarks>
+        /// <remarks>Для товарів-вилучень в полі Quantity кількість треба вказувати 0</remarks>
         public Guid? TopDocumentDetailGuid { get; set; }
 
         public long TopGoodId { get; set; }
