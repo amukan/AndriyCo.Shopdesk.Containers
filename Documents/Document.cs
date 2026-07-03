@@ -192,7 +192,10 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         [XmlEnum(Name = "4")] QrMenu = 4,
 
         /// <summary>Торговий автомат</summary>
-        [XmlEnum(Name = "8")] VendingMachine = 8
+        [XmlEnum(Name = "8")] VendingMachine = 8,
+
+        /// <summary>Електронна торгівля, мобільний додаток</summary>
+        [XmlEnum(Name = "16")] ECommerceMobile = 16
     }
 
     public static class SaleChannelExtensions
