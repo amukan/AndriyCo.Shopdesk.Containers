@@ -283,6 +283,9 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// <summary>ID запису про списання бонусної суми, отриманого від сервісу CRM</summary>
         public long BonusPaymentRecordId { get; set; }
 
+        /// <summary>ID сесії автентифікації через чат-бот</summary>
+        public long BotCustomerAuthenticationSessionId { get; set; }
+
         /// <summary>ID клієнта з облікової системи франчайзі (=0 якщо це CRM клієнт)</summary>
         public long ContractorId { get; set; }
 
