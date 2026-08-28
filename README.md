@@ -289,6 +289,7 @@ DOC_D70659_F11_P1000000826_U5_2020-08-29_11-32-20.tcudoc, де:
 |20 - ПРРО Cashalot (UniDriver, API)|
 |21 - РРО Resonance M301/M304|
 |22 - ПРРО Checkbox через API (UniDriver, API)|
+|23 - ПРРО «Вчасно.Каса»|
 
 ## <a id="addition1">Додаток 1. Зразок файлу (*.TCUDOC), що містить чек та його оплату (XML)
 
