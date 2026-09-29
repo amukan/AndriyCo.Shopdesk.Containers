@@ -5,6 +5,7 @@ using AndriyCo.Shopdesk.Containers.Serialization.Xml.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace AndriyCo.Shopdesk.Containers.Documents
@@ -75,10 +76,12 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Жодних редагувань не дозволено
         /// </summary>
         [XmlEnum(Name = "0")] None = 0,
+
         /// <summary>
         /// Дозволено додавати рядки товарів до товарного документа
         /// </summary>
         [XmlEnum(Name = "1")] AddRows = 1,
+
         /// <summary>
         /// Дозволено видаляти рядки товарів з товарного документа
         /// </summary>
@@ -103,6 +106,11 @@ namespace AndriyCo.Shopdesk.Containers.Documents
         /// Дозвіл на зменшення ціни товару в товарному документі
         /// </summary>
         [XmlEnum(Name = "32")] DecreasePrice = 32,
+
+        /// <summary>
+        /// Дозвіл на зміну клієнта в товарному документі
+        /// </summary>
+        [XmlEnum(Name = "64")] ChangeCustomer = 64,
     }
 
     /// <summary>
@@ -206,6 +214,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
             SaleChannel.ECommerce => CommonTranslator.ECommerce,
             SaleChannel.QrMenu => CommonTranslator.QrMenu,
             SaleChannel.VendingMachine => CommonTranslator.VendingMachine,
+            SaleChannel.ECommerceMobile => CommonTranslator.ECommerceMobile,
             _ => string.Empty,
         };
     }
@@ -213,15 +222,22 @@ namespace AndriyCo.Shopdesk.Containers.Documents
     [XmlType("Item")]
     public class Discount
     {
+        /// <summary>
+        /// 	Тип знижки, енумератор: 0 - Фіксована (дисконтна картка, точне зазначення ціни, тощо.), 1 - Накопичувальна, 2 - Колонка прайсу 1, 3 - Колонка прайсу 2, 4 - Колонка прайсу 3, 5 - Колонка прайсу 4, 6 - Колонка прайсу 5, 7 - Не використовується, 8 - Бонусна знижка, 9 - По сертифікату, 10 - Заокруглення копійок, 11 - Колонка прайсу 6, 12 - Колонка прайсу 7, 13 - Колонка прайсу 8, 14 - Колонка прайсу 9, 15 - Колонка прайсу 10, 16 - Колонка прайсу 11, 17 - Колонка прайсу 12, 18 - Колонка прайсу 13, 19 - Колонка прайсу 14, 20 - Колонка прайсу 15
+        /// </summary>
         public byte DiscountType { get; set; }
+
         /// <summary>
         /// Загальна сума знижки для товарної позиції
         /// </summary>
         /// <remarks>
         /// Позитивне значення - сума знижки, від'ємне значення – сума надбавки
         /// </remarks>
-        [Money]public double DiscountValue { get; set; }
+        [Money] public double DiscountValue { get; set; }
 
+        /// <summary>
+        /// Додаткова інформація про знижку, наприклад, універсальний сервісний купон
+        /// </summary>
         public string ExtendedInfo { get; set; }
     }
 
@@ -673,6 +689,9 @@ namespace AndriyCo.Shopdesk.Containers.Documents
 
         public long TopGoodId { get; set; }
 
+        /// <summary>Zero-based Id податкової групи товару в обліковій системі</summary>
+        public long? TaxGroupId { get; set; }
+
         /// <summary>Код українського класифікатора товарів зовнішньо економічної діяльності</summary>
         public string Uktzed { get; set; }
     }
@@ -700,6 +719,7 @@ namespace AndriyCo.Shopdesk.Containers.Documents
     {
         private double? decreasePercent = 1;
         private double? increasePercent = null;
+
         /// <summary>
         /// Відсоток зменшення. Не може бути від'ємним або більшим за 1.
         /// </summary>
